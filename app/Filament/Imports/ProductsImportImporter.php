@@ -68,7 +68,7 @@ class ProductsImportImporter extends Importer
                 'brand' => (string) ($this->data['brand'] ?? ''),
                 'category' => (string) ($this->data['category'] ?? ''),
                 'description' => (string) ($this->data['description'] ?? ''),
-                'price' => (float) ($this->data['price'] ?? 0),
+                'price' => (float) ($this->data['tcp'] ?? 0),
                 'market_segment' => (string) ($this->data['market_segment'] ?? ''),
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),

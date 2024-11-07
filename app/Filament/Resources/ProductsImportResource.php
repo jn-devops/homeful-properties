@@ -12,6 +12,7 @@ use Filament\Tables\Table;
 use Homeful\Products\Models\Product;
 use Homeful\Properties\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductsImportResource extends Resource
@@ -33,7 +34,8 @@ class ProductsImportResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('project_code')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('property_name')
+                Forms\Components\TextInput::make('name')
+                    ->label('Property Name')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phase')
                     ->maxLength(255),
@@ -47,7 +49,8 @@ class ProductsImportResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('project_address')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('property_type')
+                Forms\Components\TextInput::make('type')
+                    ->label('Property Type')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('unit_type')
                     ->maxLength(255),
@@ -57,20 +60,22 @@ class ProductsImportResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('building')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('processing_fee')
+                Forms\Components\TextInput::make('consultation_fee')
+                    ->label('Processing Fee')
                     ->numeric(),
                 Forms\Components\TextInput::make('brand')
+                    ->label('Brand')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('sku')
                     ->label('SKU')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('name')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('price')
+                    ->label('Price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
+                    ->prefix('Php'),
                 Forms\Components\TextInput::make('market_segment')
+                    ->label('Market Segment')
                     ->maxLength(255),
                 Forms\Components\TextInput::make('category')
                     ->maxLength(255),
@@ -100,7 +105,8 @@ class ProductsImportResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('project_code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('property_name')
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Property Name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phase')
                     ->searchable(),
@@ -114,7 +120,8 @@ class ProductsImportResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('project_address')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('property_type')
+                Tables\Columns\TextColumn::make('type')
+                    ->label('Property Type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('unit_type')
                     ->searchable(),
@@ -124,22 +131,27 @@ class ProductsImportResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('building')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('processing_fee')
+                Tables\Columns\TextColumn::make('consultation_fee')
+                    ->label('Processing Fee')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('brand')
+                Tables\Columns\TextColumn::make('product.brand')
+                    ->label('Brand')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('price')
+                Tables\Columns\TextColumn::make('product.price')
+                    ->label('Price')
                     ->money()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('market_segment')
+                Tables\Columns\TextColumn::make('product.market_segment')
+                    ->label('Market Segment')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('category')
+                    ->getStateUsing(function ($record) {
+                        return "{$record->product->market_segment} {$record->product->brand}";
+                    })
                     ->searchable(),
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
@@ -157,7 +169,14 @@ class ProductsImportResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->mutateRecordDataUsing(function (array $data, Model $record): array {
+                        $data['brand']=$record->product->brand;
+                        $data['market_segment']=$record->product->market_segment;
+                        $data['price']=$record->product->price->getAmount()->toFloat();
+                        $data['category']=$record->product->market_segment.' '.$record->product->brand;
+                        return $data;
+                    }),
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
