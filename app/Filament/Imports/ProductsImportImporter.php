@@ -80,9 +80,9 @@ class ProductsImportImporter extends Importer
 
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(
-            ['sku' => (string) ($this->data['sku'] ?? '')],
+            ['code' => (string) ($this->data['code'] ?? '')],
             [
-                'code' => (string) ($this->data['code'] ?? ''),
+                'sku' => (string) ($this->data['sku'] ?? ''),
                 'name' => (string) ($this->data['name'] ?? ''),
                 'type' => (string) ($this->data['type'] ?? ''),
                 'cluster' => (string) ($this->data['cluster'] ?? 0),
