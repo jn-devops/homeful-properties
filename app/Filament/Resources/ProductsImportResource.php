@@ -22,6 +22,7 @@ class ProductsImportResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Properties';
+    protected static ?string $label = 'Properties';
 
     public static function form(Form $form): Form
     {
