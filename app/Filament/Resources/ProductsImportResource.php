@@ -105,43 +105,28 @@ class ProductsImportResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('project_location')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('project_code')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('project_location'),
+                Tables\Columns\TextColumn::make('project_code'),
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Property Name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('phase')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('block')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('lot')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('lot_area')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('floor_area')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('project_address')
-                    ->searchable(),
+                    ->label('Property Name'),
+                Tables\Columns\TextColumn::make('phase'),
+                Tables\Columns\TextColumn::make('block'),
+                Tables\Columns\TextColumn::make('lot'),
+                Tables\Columns\TextColumn::make('lot_area'),
+                Tables\Columns\TextColumn::make('floor_area'),
+                Tables\Columns\TextColumn::make('project_address'),
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Property Type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('unit_type')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('unit_type_interior')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('house_color')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('building')
-                    ->searchable(),
+                    ->label('Property Type'),
+                Tables\Columns\TextColumn::make('unit_type'),
+                Tables\Columns\TextColumn::make('unit_type_interior'),
+                Tables\Columns\TextColumn::make('house_color'),
+                Tables\Columns\TextColumn::make('building'),
                 Tables\Columns\TextColumn::make('consultation_fee')
                     ->label('Processing Fee')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('product.brand')
-                    ->label('Brand')
-                    ->searchable(),
+                    ->label('Brand'),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')
                     ->searchable(),
@@ -155,8 +140,7 @@ class ProductsImportResource extends Resource
                 Tables\Columns\TextColumn::make('category')
                     ->getStateUsing(function ($record) {
                         return "{$record->product->market_segment} {$record->product->brand}";
-                    })
-                    ->searchable(),
+                    }),
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
                     ->sortable(),
