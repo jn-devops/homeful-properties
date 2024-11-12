@@ -26,44 +26,98 @@ class ReserveProperty extends Component implements HasForms, HasTable
             ->defaultPaginationPageOption(50)
             ->columns([
                 Tables\Columns\TextColumn::make('code')
-                    ->searchable(),
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('project_location')
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->where('meta->project_location', 'like', "%{$search}%");
-                    }),
-                Tables\Columns\TextColumn::make('project_code'),
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('project_code')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_code', 'like', "%{$search}%");
+                    },isIndividual: true),
                 Tables\Columns\TextColumn::make('name')
                     ->label('Property Name')
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->where('meta->name', 'like', "%{$search}%");
-                    }),
-                Tables\Columns\TextColumn::make('phase'),
-                Tables\Columns\TextColumn::make('block'),
-                Tables\Columns\TextColumn::make('lot'),
-                Tables\Columns\TextColumn::make('lot_area'),
-                Tables\Columns\TextColumn::make('floor_area'),
-                Tables\Columns\TextColumn::make('project_address'),
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('phase')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->phase', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('block')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->block', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('lot')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->lot', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('lot_area')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->lot_area', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('floor_area')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->floor_area', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('project_address')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_address', 'like', "%{$search}%");
+                    },isIndividual: true),
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Property Type'),
-                Tables\Columns\TextColumn::make('unit_type'),
-                Tables\Columns\TextColumn::make('unit_type_interior'),
-                Tables\Columns\TextColumn::make('house_color'),
-                Tables\Columns\TextColumn::make('building'),
+                    ->label('Property Type')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->type', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('unit_type')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->unit_type', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('unit_type_interior')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->unit_type_interior', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('house_color')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->house_color', 'like', "%{$search}%");
+                    },isIndividual: true),
+                Tables\Columns\TextColumn::make('building')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->building', 'like', "%{$search}%");
+                    },isIndividual: true),
                 Tables\Columns\TextColumn::make('consultation_fee')
                     ->label('Processing Fee')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->consultation_fee', 'like', "%{$search}%");
+                    },isIndividual: true),
                 Tables\Columns\TextColumn::make('product.brand')
-                    ->label('Brand'),
+                    ->label('Brand')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')
-                    ->searchable(),
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('product.price')
                     ->label('Price')
                     ->money()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('product.market_segment')
                     ->label('Market Segment'),
                 Tables\Columns\TextColumn::make('category')
@@ -72,7 +126,11 @@ class ReserveProperty extends Component implements HasForms, HasTable
                     }),
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->appraised_value', 'like', "%{$search}%");
+                    },isIndividual: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
