@@ -4,10 +4,13 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductsImportResource\Pages;
 use App\Filament\Resources\ProductsImportResource\RelationManagers;
+use App\Models\Status;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Homeful\Products\Models\Product;
 use Homeful\Properties\Models\Property;
@@ -180,6 +183,24 @@ class ProductsImportResource extends Resource
                     }),
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Action::make('update_status')
+                    ->label('Update Status')
+                    ->form([
+                        Forms\Components\Select::make('status')
+                            ->native(false)
+                            ->options(
+                                Status::pluck('description','code')
+                            )
+                            ->searchable()
+                            ->required()
+                    ])
+                    ->action(function ($record, array $data){
+                        $record->update([
+                            'status'=>$data['status']
+                        ]);
+                        $record->save();
+                    })
+                    ->modalWidth(MaxWidth::Small)
             ],Tables\Enums\ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
