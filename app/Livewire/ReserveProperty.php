@@ -144,8 +144,12 @@ class ReserveProperty extends Component implements HasForms, HasTable
                 //
             ])
             ->actions([
-                //
-            ])
+                Tables\Actions\Action::make('reserve')
+                    ->button()
+                    ->action(function($record){
+
+                    })
+            ],Tables\Enums\ActionsPosition::BeforeCells)
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     //
