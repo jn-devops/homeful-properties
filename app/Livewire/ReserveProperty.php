@@ -102,7 +102,6 @@ class ReserveProperty extends Component implements HasForms, HasTable
                 Tables\Columns\TextColumn::make('consultation_fee')
                     ->label('Processing Fee')
                     ->numeric()
-                    ->sortable()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->where('meta->consultation_fee', 'like', "%{$search}%");
@@ -116,7 +115,6 @@ class ReserveProperty extends Component implements HasForms, HasTable
                 Tables\Columns\TextColumn::make('product.price')
                     ->label('Price')
                     ->money()
-                    ->sortable()
                     ->searchable(isIndividual: true),
                 Tables\Columns\TextColumn::make('product.market_segment')
                     ->label('Market Segment'),
@@ -126,7 +124,6 @@ class ReserveProperty extends Component implements HasForms, HasTable
                     }),
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
-                    ->sortable()
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->where('meta->appraised_value', 'like', "%{$search}%");
