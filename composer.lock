@@ -3212,16 +3212,16 @@
         },
         {
             "name": "jn-devops/properties",
-            "version": "v1.4.1",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/properties.git",
-                "reference": "93a41dc9f1f158e3cf0112391aebf643cf545964"
+                "reference": "83436d9682aa8773cba8612f71ecbb3da0cd025c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/properties/zipball/93a41dc9f1f158e3cf0112391aebf643cf545964",
-                "reference": "93a41dc9f1f158e3cf0112391aebf643cf545964",
+                "url": "https://api.github.com/repos/jn-devops/properties/zipball/83436d9682aa8773cba8612f71ecbb3da0cd025c",
+                "reference": "83436d9682aa8773cba8612f71ecbb3da0cd025c",
                 "shasum": ""
             },
             "require": {
@@ -3282,7 +3282,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/properties/issues",
-                "source": "https://github.com/jn-devops/properties/tree/v1.4.1"
+                "source": "https://github.com/jn-devops/properties/tree/v1.4.2"
             },
             "funding": [
                 {
@@ -3290,7 +3290,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-12T07:59:04+00:00"
+            "time": "2024-11-14T23:29:08+00:00"
         },
         {
             "name": "jn-devops/property",
