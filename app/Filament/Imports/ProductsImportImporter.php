@@ -29,9 +29,9 @@ class ProductsImportImporter extends Importer
             ImportColumn::make('sku')
                 ->label('SKU')
                 ->rules(['max:255']),
-            ImportColumn::make('market_segment')
-                ->label('Market Segement')
-                ->rules(['max:255']),
+//            ImportColumn::make('market_segment')
+//                ->label('Market Segement')
+//                ->rules(['max:255']),
             ImportColumn::make('phase')
                 ->rules(['max:255']),
             ImportColumn::make('block')
@@ -66,6 +66,7 @@ class ProductsImportImporter extends Importer
             $facade = $facadeData['facade'] ?? null;
         }
 
+
         // Create or update the Product record based on SKU
         $product = Product::updateOrCreate(
             ['sku' => (string) ($this->data['sku'] ?? '')],
@@ -75,7 +76,6 @@ class ProductsImportImporter extends Importer
                 'category' => (string) ($this->data['category'] ?? ''),
                 'description' => (string) ($this->data['description'] ?? ''),
                 'price' => (float) ($this->data['tcp'] ?? 0),
-                'market_segment' => (string) ($this->data['market_segment'] ?? ''),
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),
                 'amenities' => (string) ($this->data['amenities'] ?? ''),
@@ -83,9 +83,6 @@ class ProductsImportImporter extends Importer
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
             ]
         );
-
-//        $product->meta->set('market_segment',(string) ($this->data['description'] ?? ''));
-//        $product->save();
 
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(
@@ -110,7 +107,7 @@ class ProductsImportImporter extends Importer
 
 //        dd($product, $property);
         // Associate the Property with the Product
-//        $property->product()->associate($product);
+        $property->product()->associate($product);
 
         $property->save();
 
