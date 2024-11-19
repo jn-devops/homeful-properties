@@ -16,15 +16,21 @@ class ProductsImportImporter extends Importer
     {
         return [
             ImportColumn::make('code')
+                ->guess(['property_code'])
                 ->rules(['max:255']),
             ImportColumn::make('name')
+                ->guess(['property_name'])
                 ->rules(['max:255']),
             ImportColumn::make('type')
+                ->guess(['property_type'])
                 ->rules(['max:255']),
             ImportColumn::make('cluster')
                 ->rules(['max:255']),
             ImportColumn::make('sku')
                 ->label('SKU')
+                ->rules(['max:255']),
+            ImportColumn::make('market_segment')
+                ->label('Market Segement')
                 ->rules(['max:255']),
             ImportColumn::make('phase')
                 ->rules(['max:255']),
@@ -78,6 +84,9 @@ class ProductsImportImporter extends Importer
             ]
         );
 
+//        $product->meta->set('market_segment',(string) ($this->data['description'] ?? ''));
+//        $product->save();
+
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(
             ['code' => (string) ($this->data['code'] ?? '')],
@@ -99,8 +108,10 @@ class ProductsImportImporter extends Importer
             ]
         );
 
+//        dd($product, $property);
         // Associate the Property with the Product
-        $property->product()->associate($product);
+//        $property->product()->associate($product);
+
         $property->save();
 
         return $property;
