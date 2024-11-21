@@ -97,11 +97,13 @@ class ProductsImportImporter extends Importer
                 'lot' => (string) ($this->data['lot'] ?? ''),
                 'floor_area' => (float) ($this->data['floor_area'] ?? 0),
                 'lot_area' => (float) ($this->data['lot_area'] ?? 0),
-                'building' => (string) ($this->data['building'] ?? ''),
+//                'building' => (string) ($this->data['building'] ?? ''),
                 'unit_type' => (string) ($this->data['unit_type'] ?? ''),
+                'unit_type_interior' => (string) ($this->data['unit_type_interior'] ?? ''),
                 'project_code' => (string) ($this->data['project_code'] ?? ''),
                 'project_location' => (string) ($this->data['project_location'] ?? ''),
                 'project_address' => (string) ($this->data['project_address'] ?? ''),
+                'consultation_fee' => (string) ($this->data['consultation_fee'] ?? ''),
             ]
         );
 

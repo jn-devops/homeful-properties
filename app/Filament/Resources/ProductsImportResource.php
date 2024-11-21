@@ -60,10 +60,10 @@ class ProductsImportResource extends Resource
                     ->maxLength(255),
                 Forms\Components\TextInput::make('unit_type_interior')
                     ->maxLength(255),
-                Forms\Components\TextInput::make('house_color')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('building')
-                    ->maxLength(255),
+//                Forms\Components\TextInput::make('house_color')
+//                    ->maxLength(255),
+//                Forms\Components\TextInput::make('building')
+//                    ->maxLength(255),
                 Forms\Components\TextInput::make('consultation_fee')
                     ->label('Processing Fee')
                     ->numeric(),
