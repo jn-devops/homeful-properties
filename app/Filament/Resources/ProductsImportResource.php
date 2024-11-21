@@ -119,8 +119,8 @@ class ProductsImportResource extends Resource
                     ->label('Property Type'),
                 Tables\Columns\TextColumn::make('unit_type'),
                 Tables\Columns\TextColumn::make('unit_type_interior'),
-                Tables\Columns\TextColumn::make('house_color'),
-                Tables\Columns\TextColumn::make('building'),
+//                Tables\Columns\TextColumn::make('house_color'),
+//                Tables\Columns\TextColumn::make('building'),
                 Tables\Columns\TextColumn::make('consultation_fee')
                     ->label('Processing Fee')
                     ->numeric()
