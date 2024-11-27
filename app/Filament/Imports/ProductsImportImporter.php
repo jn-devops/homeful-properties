@@ -58,13 +58,13 @@ class ProductsImportImporter extends Importer
     {
         $facadeUrl = $this->data['facade_url'] ?? null;
 
-        if ($facadeUrl) {
-            // Decode the JSON string into an associative array
-            $facadeData = json_decode($facadeUrl, true);
-
-            // Check if the 'facade' key exists and get its value
-            $facade = $facadeData['facade'] ?? null;
-        }
+//        if ($facadeUrl) {
+//            // Decode the JSON string into an associative array
+//            $facadeData = json_decode($facadeUrl, true);
+//
+//            // Check if the 'facade' key exists and get its value
+//            $facade = $facadeData['facade'] ?? null;
+//        }
 
 
         // Create or update the Product record based on SKU
