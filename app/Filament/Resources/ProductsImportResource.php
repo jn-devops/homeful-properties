@@ -134,6 +134,10 @@ class ProductsImportResource extends Resource
                     ->label('Price')
                     ->money()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('tcp')
+                    ->label('TCP')
+                    ->money()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('product.market_segment')
                     ->label('Market Segment')
                     ->searchable(),
