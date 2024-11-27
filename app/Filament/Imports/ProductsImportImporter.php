@@ -102,6 +102,7 @@ class ProductsImportImporter extends Importer
                 'project_code' => (string) ($this->data['project_code'] ?? ''),
                 'project_location' => (string) ($this->data['project_location'] ?? ''),
                 'project_address' => (string) ($this->data['project_address'] ?? ''),
+                'tcp' => (float) ($this->data['tcp'] ?? 0),
             ]
         );
 //        $property->consultation_fee=(string) ($this->data['consultation_fee'] ?? '');
