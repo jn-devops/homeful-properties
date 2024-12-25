@@ -3050,16 +3050,16 @@
         },
         {
             "name": "jn-devops/common",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/common.git",
-                "reference": "7385edcd95432ce465e37173c9e49030c207a4c0"
+                "reference": "ec9169ab5d74657707c42ac78df3e5b302344c1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/common/zipball/7385edcd95432ce465e37173c9e49030c207a4c0",
-                "reference": "7385edcd95432ce465e37173c9e49030c207a4c0",
+                "url": "https://api.github.com/repos/jn-devops/common/zipball/ec9169ab5d74657707c42ac78df3e5b302344c1b",
+                "reference": "ec9169ab5d74657707c42ac78df3e5b302344c1b",
                 "shasum": ""
             },
             "require": {
@@ -3086,12 +3086,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Homeful\\Common\\CommonServiceProvider"
-                    ],
                     "aliases": {
                         "Common": "Homeful\\Common\\Facades\\Common"
-                    }
+                    },
+                    "providers": [
+                        "Homeful\\Common\\CommonServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -3123,7 +3123,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/common/issues",
-                "source": "https://github.com/jn-devops/common/tree/v1.3.1"
+                "source": "https://github.com/jn-devops/common/tree/v1.3.2"
             },
             "funding": [
                 {
@@ -3131,20 +3131,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-27T04:58:51+00:00"
+            "time": "2024-12-23T09:49:12+00:00"
         },
         {
             "name": "jn-devops/products",
-            "version": "v1.2.4",
+            "version": "v1.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/products.git",
-                "reference": "91b8647e9412705eb113fa3c14bd4cc502d54742"
+                "reference": "3da23b2324a1a3f2c132e4a104dda2a32ac60150"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/products/zipball/91b8647e9412705eb113fa3c14bd4cc502d54742",
-                "reference": "91b8647e9412705eb113fa3c14bd4cc502d54742",
+                "url": "https://api.github.com/repos/jn-devops/products/zipball/3da23b2324a1a3f2c132e4a104dda2a32ac60150",
+                "reference": "3da23b2324a1a3f2c132e4a104dda2a32ac60150",
                 "shasum": ""
             },
             "require": {
@@ -3170,12 +3170,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Homeful\\Products\\ProductsServiceProvider"
-                    ],
                     "aliases": {
                         "Products": "Homeful\\Products\\Facades\\Products"
-                    }
+                    },
+                    "providers": [
+                        "Homeful\\Products\\ProductsServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -3204,7 +3204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/products/issues",
-                "source": "https://github.com/jn-devops/products/tree/v1.2.4"
+                "source": "https://github.com/jn-devops/products/tree/v1.2.5"
             },
             "funding": [
                 {
@@ -3212,20 +3212,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-16T09:21:21+00:00"
+            "time": "2024-12-25T15:18:29+00:00"
         },
         {
             "name": "jn-devops/properties",
-            "version": "v1.4.6",
+            "version": "v1.4.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/properties.git",
-                "reference": "37401ec93a4cfeb29effee384ed4edd7604b9b6b"
+                "reference": "996cce38c3c41a62e13baa285c4fbbc474384b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/properties/zipball/37401ec93a4cfeb29effee384ed4edd7604b9b6b",
-                "reference": "37401ec93a4cfeb29effee384ed4edd7604b9b6b",
+                "url": "https://api.github.com/repos/jn-devops/properties/zipball/996cce38c3c41a62e13baa285c4fbbc474384b7d",
+                "reference": "996cce38c3c41a62e13baa285c4fbbc474384b7d",
                 "shasum": ""
             },
             "require": {
@@ -3252,12 +3252,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "providers": [
-                        "Homeful\\Properties\\PropertiesServiceProvider"
-                    ],
                     "aliases": {
                         "Properties": "Homeful\\Properties\\Facades\\Properties"
-                    }
+                    },
+                    "providers": [
+                        "Homeful\\Properties\\PropertiesServiceProvider"
+                    ]
                 }
             },
             "autoload": {
@@ -3286,7 +3286,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/properties/issues",
-                "source": "https://github.com/jn-devops/properties/tree/v1.4.6"
+                "source": "https://github.com/jn-devops/properties/tree/v1.4.7"
             },
             "funding": [
                 {
@@ -3294,7 +3294,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-11-27T06:55:31+00:00"
+            "time": "2024-12-05T06:41:30+00:00"
         },
         {
             "name": "jn-devops/property",
