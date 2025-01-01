@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Homeful\Properties\Data\PropertyData;
 use App\Http\Resources\PropertyResource;
 use Homeful\Properties\Models\Property;
 use Illuminate\Http\Request;
