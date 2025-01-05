@@ -15,6 +15,9 @@ class FetchProductsController extends Controller
         return FetchData::from(compact('products'))
             ->only(
                 'products.sku',
+                'products.name',
+                'products.brand',
+                'products.category',
                 'products.price',
                 'products.appraised_value',
                 'products.percent_down_payment',

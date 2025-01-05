@@ -19,8 +19,8 @@ test('fetch properties is working', function () {
 })->skip();
 
 test('fetch properties end point is working', function () {
-    $properties = Property::factory(2)->forProduct()->forProject()->create();
-    $response = $this->get(route('fetch-properties'));
-    expect($response->json('properties'))->toHaveCount(2);
+    $properties = Property::factory(3)->forProduct()->forProject()->create();
+    $response = $this->get(route('fetch-products'));
+    expect($response->json())->toHaveCount(2);
 })->skip();
 
