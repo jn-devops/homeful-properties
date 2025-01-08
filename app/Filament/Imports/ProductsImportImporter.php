@@ -51,6 +51,17 @@ class ProductsImportImporter extends Importer
             ImportColumn::make('project_location')
                 ->rules(['max:255']),
             ImportColumn::make('project_address'),
+
+            ImportColumn::make('price')
+                ->numeric(),
+            ImportColumn::make('tcp')
+                ->numeric(),
+            ImportColumn::make('percent_dp')
+                ->numeric(),
+            ImportColumn::make('dp_term')
+                ->numeric(),
+            ImportColumn::make('percent_mf')
+                ->numeric(),
         ];
     }
 
@@ -75,12 +86,16 @@ class ProductsImportImporter extends Importer
                 'brand' => (string) ($this->data['brand'] ?? ''),
                 'category' => (string) ($this->data['category'] ?? ''),
                 'description' => (string) ($this->data['description'] ?? ''),
-                'price' => (float) ($this->data['tcp'] ?? 0),
+                'price' => (float) ($this->data['price'] ?? 0),
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),
                 'amenities' => (string) ($this->data['amenities'] ?? ''),
                 'facade_url' => (string) ($facade ?? ''),
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
+
+                'percent_dp'=>(float) ($this->data['percent_dp'] ?? 0),
+                'dp_term'=>(float) ($this->data['dp_term'] ?? 0),
+                'percent_mf'=>(float) ($this->data['percent_mf'] ?? 0),
             ]
         );
 
