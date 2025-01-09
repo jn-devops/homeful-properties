@@ -3,19 +3,19 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Homeful\Properties\Data\PropertyData;
+use Homeful\Products\Data\ProductData;
 use Illuminate\Http\Request;
 
-class PropertyResource extends JsonResource
+class ProductResource extends JsonResource
 {
 
-    protected PropertyData $data;
+    protected ProductData $data;
 
     public function __construct($resource)
     {
         parent::__construct($resource);
 
-        $this->data = PropertyData::fromModel($resource);
+        $this->data = ProductData::fromModel($resource);
     }
 
     public function toArray(Request $request): array
