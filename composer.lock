@@ -2997,16 +2997,16 @@
         },
         {
             "name": "jn-devops/common",
-            "version": "v1.3.4",
+            "version": "v1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/common.git",
-                "reference": "a127e174a7c7eb471589a874cb62a8c9923fd331"
+                "reference": "7fda3a00fe1fd6cc0ddb13ab3fa13a7082917781"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/common/zipball/a127e174a7c7eb471589a874cb62a8c9923fd331",
-                "reference": "a127e174a7c7eb471589a874cb62a8c9923fd331",
+                "url": "https://api.github.com/repos/jn-devops/common/zipball/7fda3a00fe1fd6cc0ddb13ab3fa13a7082917781",
+                "reference": "7fda3a00fe1fd6cc0ddb13ab3fa13a7082917781",
                 "shasum": ""
             },
             "require": {
@@ -3070,7 +3070,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/common/issues",
-                "source": "https://github.com/jn-devops/common/tree/v1.3.4"
+                "source": "https://github.com/jn-devops/common/tree/v1.3.5"
             },
             "funding": [
                 {
@@ -3078,20 +3078,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-05T14:21:10+00:00"
+            "time": "2025-01-09T02:18:18+00:00"
         },
         {
             "name": "jn-devops/products",
-            "version": "v1.2.5",
+            "version": "v1.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/products.git",
-                "reference": "3da23b2324a1a3f2c132e4a104dda2a32ac60150"
+                "reference": "1c2a3e1192b3ff2c80bdabcc32f158fc66850306"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/products/zipball/3da23b2324a1a3f2c132e4a104dda2a32ac60150",
-                "reference": "3da23b2324a1a3f2c132e4a104dda2a32ac60150",
+                "url": "https://api.github.com/repos/jn-devops/products/zipball/1c2a3e1192b3ff2c80bdabcc32f158fc66850306",
+                "reference": "1c2a3e1192b3ff2c80bdabcc32f158fc66850306",
                 "shasum": ""
             },
             "require": {
@@ -3151,7 +3151,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/products/issues",
-                "source": "https://github.com/jn-devops/products/tree/v1.2.5"
+                "source": "https://github.com/jn-devops/products/tree/v1.2.6"
             },
             "funding": [
                 {
@@ -3159,7 +3159,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-25T15:18:29+00:00"
+            "time": "2025-01-09T01:45:35+00:00"
         },
         {
             "name": "jn-devops/properties",
@@ -4947,12 +4947,12 @@
             "version": "3.8.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/briannesbitt/Carbon.git",
+                "url": "https://github.com/CarbonPHP/carbon.git",
                 "reference": "129700ed449b1f02d70272d2ac802357c8c30c58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/129700ed449b1f02d70272d2ac802357c8c30c58",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/129700ed449b1f02d70272d2ac802357c8c30c58",
                 "reference": "129700ed449b1f02d70272d2ac802357c8c30c58",
                 "shasum": ""
             },

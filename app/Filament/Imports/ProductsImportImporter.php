@@ -93,11 +93,15 @@ class ProductsImportImporter extends Importer
                 'facade_url' => (string) ($facade ?? ''),
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
 
-                'percent_dp'=>(float) ($this->data['percent_dp'] ?? 0),
-                'dp_term'=>(float) ($this->data['dp_term'] ?? 0),
-                'percent_mf'=>(float) ($this->data['percent_mf'] ?? 0),
+//                'percent_dp'=>(float) ($this->data['percent_dp'] ?? 0),
+//                'dp_term'=>(float) ($this->data['dp_term'] ?? 0),
+//                'percent_mf'=>(float) ($this->data['percent_mf'] ?? 0),
             ]
         );
+
+        $product->percent_dp=(float) ($this->data['percent_dp'] ?? 0);
+        $product->dp_term=(float) ($this->data['dp_term'] ?? 0);
+        $product->percent_mf=(float) ($this->data['percent_mf'] ?? 0);
 
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(

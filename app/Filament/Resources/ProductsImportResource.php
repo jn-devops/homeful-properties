@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductsImportResource\Pages;
 use App\Filament\Resources\ProductsImportResource\RelationManagers;
 use App\Models\Status;
 use Filament\Forms;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
@@ -17,6 +18,7 @@ use Homeful\Properties\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class ProductsImportResource extends Resource
 {
@@ -31,72 +33,101 @@ class ProductsImportResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('code')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('project_location')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('project_code')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('name')
-                    ->label('Property Name')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phase')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('block')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('lot')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('lot_area')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('floor_area')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('project_address')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('type')
-                    ->label('Property Type')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('unit_type')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('unit_type_interior')
-                    ->maxLength(255),
-//                Forms\Components\TextInput::make('house_color')
-//                    ->maxLength(255),
-//                Forms\Components\TextInput::make('building')
-//                    ->maxLength(255),
-                Forms\Components\TextInput::make('consultation_fee')
-                    ->label('Processing Fee')
-                    ->numeric(),
-                Forms\Components\TextInput::make('brand')
-                    ->label('Brand')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('sku')
-                    ->label('SKU')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('price')
-                    ->label('Price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('Php'),
-                Forms\Components\TextInput::make('market_segment')
-                    ->label('Market Segment')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('category')
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('product_location_details')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('lifestyle_destinations')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('amenities')
-                    ->columnSpanFull(),
-                Forms\Components\Textarea::make('how_to_get_there')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('appraised_value')
-                    ->numeric()
-                    ->prefix('$'),
-            ]);
+                Forms\Components\Section::make()
+                    ->schema([
+                        Forms\Components\TextInput::make('code')
+                            ->label('Code')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('sku')
+                            ->label('SKU')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('name')
+                            ->label('Property Name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('brand')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('category')
+                            ->maxLength(255),
+//                        Forms\Components\TextInput::make('description')
+//                            ->maxLength(255),
+                        Forms\Components\TextInput::make('price')
+                            ->label('Price')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('tcp')
+                            ->label('TCP')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('facade_url')
+                            ->label('Facade URL')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('percent_dp')
+                            ->label('Down Payment Percentage')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('dp_term')
+                            ->label('Down Payment Term')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('percent_mf')
+                            ->label('Miscellaneous Fees Percentage')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('code')
+                            ->label('Property Code')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('type')
+                            ->label('Property Type')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('cluster')
+                            ->label('Cluster')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phase')
+                            ->label('Phase')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('block')
+                            ->label('Block')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('lot')
+                            ->label('Lot')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('floor_area')
+                            ->label('Floor Area (sqm)')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('lot_area')
+                            ->label('Lot Area (sqm)')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('unit_type')
+                            ->label('Unit Type')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('project_code')
+                            ->label('Project Code')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('project_location')
+                            ->label('Project Location')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('project_address')
+                            ->label('Project Address')
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('tcp')
+                            ->label('Total Contract Price (TCP)')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('unit_type_interior')
+                            ->label('Unit Type Interior')
+                            ->maxLength(255),
+
+                    ])
+                    ->columnSpan(2)->columns(2),
+                    Forms\Components\Section::make()
+                    ->schema([
+                        Placeholder::make('created_at')
+                            ->content(fn ($record) => $record?->created_at?->diffForHumans() ?? new HtmlString('&mdash;')),
+
+                        Placeholder::make('updated_at')
+                            ->content(fn ($record) => $record?->created_at?->diffForHumans() ?? new HtmlString('&mdash;'))
+
+                    ])->columnSpan(1),
+
+            ])->columns(3);
     }
 
     public static function table(Table $table): Table
@@ -104,27 +135,110 @@ class ProductsImportResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('code')
+                    ->sortable()
                     ->searchable(),
-                Tables\Columns\TextColumn::make('project_location'),
-                Tables\Columns\TextColumn::make('project_code'),
+                Tables\Columns\TextColumn::make('project_location')
+                    ->label('Project Location')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->project_location', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_location', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('project_code')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->project_code', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_code', 'like', "%{$search}%");
+                    }),
                 Tables\Columns\TextColumn::make('name')
-                    ->label('Property Name'),
-                Tables\Columns\TextColumn::make('phase'),
-                Tables\Columns\TextColumn::make('block'),
-                Tables\Columns\TextColumn::make('lot'),
-                Tables\Columns\TextColumn::make('lot_area'),
-                Tables\Columns\TextColumn::make('floor_area'),
-                Tables\Columns\TextColumn::make('project_address'),
+                    ->label('Property Name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phase')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->phase', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->phase', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('block')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->block', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->block', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('lot')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->lot', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->lot', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('lot_area')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->lot_area', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->lot_area', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('floor_area')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->floor_area', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->floor_area', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('project_address')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->project_address', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_address', 'like', "%{$search}%");
+                    }),
                 Tables\Columns\TextColumn::make('type')
-                    ->label('Property Type'),
-                Tables\Columns\TextColumn::make('unit_type'),
-                Tables\Columns\TextColumn::make('unit_type_interior'),
-//                Tables\Columns\TextColumn::make('house_color'),
-//                Tables\Columns\TextColumn::make('building'),
-                Tables\Columns\TextColumn::make('consultation_fee')
-                    ->label('Processing Fee')
-                    ->numeric()
+                    ->label('Property Type')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('unit_type')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->unit_type', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->unit_type', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('unit_type_interior')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->unit_type_interior', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->unit_type_interior', 'like', "%{$search}%");
+                    }),
+//                Tables\Columns\TextColumn::make('consultation_fee')
+//                    ->label('Processing Fee')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('product.brand')
                     ->label('Brand'),
                 Tables\Columns\TextColumn::make('sku')
@@ -132,15 +246,22 @@ class ProductsImportResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('product.price')
                     ->label('Price')
-                    ->money()
+                    ->money('PHP')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tcp')
                     ->label('TCP')
-                    ->money()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('product.market_segment')
-                    ->label('Market Segment')
-                    ->searchable(),
+                    ->money('PHP')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->tcp', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->tcp', 'like', "%{$search}%");
+                    }),
+//                Tables\Columns\TextColumn::make('product.market_segment')
+//                    ->label('Market Segment')
+//                    ->searchable(),
                 Tables\Columns\TextColumn::make('category')
                     ->getStateUsing(function ($record) {
                         return "{$record->product->market_segment} {$record->product->brand}";
@@ -161,14 +282,75 @@ class ProductsImportResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
+//                Tables\Actions\ViewAction::make()
+//                    ->mutateRecordDataUsing(function (array $data, Model $record): array {
+//                        $data['brand']=$record->product->brand;
+//                        $data['market_segment']=$record->product->market_segment;
+//                        $data['price']=$record->product->price->getAmount()->toFloat();
+//                        $data['category']=$record->product->market_segment.' '.$record->product->brand;
+//                        return $data;
+//                    }),
+                Tables\Actions\EditAction::make()
                     ->mutateRecordDataUsing(function (array $data, Model $record): array {
                         $data['brand']=$record->product->brand;
-                        $data['market_segment']=$record->product->market_segment;
+//                        $data['market_segment']=$record->product->market_segment;
                         $data['price']=$record->product->price->getAmount()->toFloat();
+                        $data['tcp']=$record->tcp;
                         $data['category']=$record->product->market_segment.' '.$record->product->brand;
+                        $data['unit_type_interior']=$record->unit_type_interior;
+                        $data['phase']=$record->phase;
+                        $data['block']=$record->block;
+                        $data['lot']=$record->lot;
+                        $data['floor_area']=$record->floor_area;
+                        $data['lot_area']=$record->lot_area;
+                        $data['unit_type']=$record->unit_type;
+                        $data['project_code']=$record->project_code;
+                        $data['project_location']=$record->project_location;
+                        $data['project_address']=$record->project_address;
+                        $data['facade_url']=$record->product->facade_url;
+
+                        $data['percent_dp']=$record->product->meta->percent_dp;
+                        $data['percent_mf']=$record->product->meta->percent_mf;
+                        $data['dp_term']=$record->product->meta->dp_term;
+
                         return $data;
-                    }),
+                    })
+                    ->using(function (Model $record, array $data): Model {
+                        $record->update($data);
+                        $record->product->brand = $data['brand'];
+//                        $record->product->market_segment = $data['market_segment'];
+                        $record->product->price=$data['price'];
+                        $record->tcp = $data['tcp'];
+                        $record->product->category = $data['category'];
+                        $record->unit_type_interior = $data['unit_type_interior'];
+                        $record->phase = $data['phase'];
+                        $record->block = $data['block'];
+                        $record->lot = $data['lot'];
+                        $record->floor_area = $data['floor_area'];
+                        $record->lot_area = $data['lot_area'];
+                        $record->unit_type = $data['unit_type'];
+                        $record->project_code = $data['project_code'];
+                        $record->project_location = $data['project_location'];
+                        $record->project_address = $data['project_address'];
+                        $record->product->facade_url = $data['facade_url'];
+
+                        $record->product->meta->set('percent_dp',$data['percent_dp']);
+                        $record->product->meta->set('percent_mf',$data['percent_mf']);
+                        $record->product->meta->set('dp_term',$data['dp_term']);
+
+
+                        $record->product->save();
+//                        dd($record->product);
+
+//                        dd(
+//                            [$record->product->percent_dp, $record->product->percent_mf, $record->product->dp_term],
+//                            [$data['percent_dp'],$data['percent_mf'],$data['dp_term'],$data['dp_term']]
+//                        );
+                        $record->save();
+
+                        return $record;
+                    })
+                    ->modalWidth(MaxWidth::SevenExtraLarge),
                 // Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
                 Action::make('update_status')
