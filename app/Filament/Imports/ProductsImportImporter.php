@@ -99,9 +99,13 @@ class ProductsImportImporter extends Importer
             ]
         );
 
-        $product->percent_dp=(float) ($this->data['percent_dp'] ?? 0);
-        $product->dp_term=(float) ($this->data['dp_term'] ?? 0);
-        $product->percent_mf=(float) ($this->data['percent_mf'] ?? 0);
+        $product->meta->set('percent_dp',$this->data['percent_dp']);
+        $product->meta->set('percent_mf',$this->data['percent_mf']);
+        $product->meta->set('dp_term',$this->data['dp_term']);
+
+//        $product->percent_dp=(float) ($this->data['percent_dp'] ?? 0);
+//        $product->dp_term=(float) ($this->data['dp_term'] ?? 0);
+//        $product->percent_mf=(float) ($this->data['percent_mf'] ?? 0);
 
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(
