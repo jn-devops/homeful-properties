@@ -21,8 +21,8 @@ return new class extends Migration
 
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
-            $table->string('name')->unique();
+            $table->string('code');
+            $table->string('name');
             $table->string('location')->index();
             $table->schemalessAttributes('meta');
             $table->timestamps();
