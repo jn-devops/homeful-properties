@@ -16,3 +16,4 @@ Route::get('product-details/{product_code}', GetProductDetailController::class)
 
 Route::get('next-property-details/{product_code}', GetNextPropertyDetailController::class)
     ->name('next-property-details');
+
