@@ -187,6 +187,11 @@ class ProductsImportImporter extends Importer
         $this->record->project_location=(string) ($this->data['project_location'] ?? '');
         $this->record->project_address=(string) ($this->data['project_address'] ?? '');
 
+        $this->record->bedrooms=(string) ($this->data['bedrooms'] ?? '');
+        $this->record->toilets_and_bathrooms=(string) ($this->data['toilet_and_bathrooms'] ?? '');
+        $this->record->parking_slots=(string) ($this->data['parking'] ?? '');
+        $this->record->carports=(string) ($this->data['carports'] ?? '');
+
 
         $this->record->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
         $this->record->product()->associate($product);
