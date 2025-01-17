@@ -14,24 +14,29 @@ class ProjectsImporter extends Importer
     {
         return [
             ImportColumn::make('code')
-                ->guess(['code'])
+                ->guess(['code','project_code'])
                 ->rules(['max:255']),
             ImportColumn::make('name')
-                ->guess(['name'])
+                ->guess(['name','project_name'])
                 ->rules(['max:255']),
             ImportColumn::make('location')
-                ->guess(['location'])
+                ->guess(['location','project_location'])
                 ->rules(['max:255']),
             ImportColumn::make('address')
+                ->guess(['address','project_address'])
                 ->rules(['max:255']),
             ImportColumn::make('type')
+                ->guess(['type','project_type'])
                 ->label('Market Segment')
                 ->rules(['max:255']),
             ImportColumn::make('housingType')
+                ->guess(['housing_type'])
                 ->rules(['max:255']),
             ImportColumn::make('licenseNumber')
+                ->guess(['license_number','project_license_number'])
                 ->rules(['max:255']),
             ImportColumn::make('licenseDate')
+                ->guess(['license_date','project_license_date'])
                 ->rules(['max:255']),
             ImportColumn::make('company_code')
                 ->rules(['max:255']),
@@ -44,16 +49,16 @@ class ProjectsImporter extends Importer
     {
         $project = Project::firstOrCreate(
             [
-                'name' => $this->data['name'],
-                'code'=>$this->data['code'],
+                'name' => $this->data['project_name'],
+                'code'=>$this->data['project_code'],
             ],[
-            'location'=>$this->data['location'],
+            'location'=>$this->data['project_location'],
         ]);
-        $project->meta->set('address', $this->data['address']);
-        $project->meta->set('type', $this->data['type']);
-        $project->meta->set('housingType', $this->data['housingType']);
-        $project->meta->set('licenseNumber', $this->data['licenseNumber']);
-        $project->meta->set('licenseDate', $this->data['licenseDate']);
+        $project->meta->set('address', $this->data['project_address']);
+        $project->meta->set('type', $this->data['project_type']);
+        $project->meta->set('housingType', $this->data['housing_type']);
+        $project->meta->set('licenseNumber', $this->data['housing_type']);
+        $project->meta->set('licenseDate', $this->data['license_date']);
         $project->meta->set('company_code', $this->data['company_code']);
         $project->meta->set('appraised_lot_value', $this->data['appraised_lot_value']);
         $project->meta->set('appraised__lot_value', $this->data['appraised_lot_value']);
