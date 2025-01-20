@@ -86,27 +86,26 @@ class ProductsImportImporter extends Importer
                 'brand' => (string) ($this->data['brand'] ?? ''),
                 'category' => (string) ($this->data['category'] ?? ''),
                 'description' => (string) ($this->data['description'] ?? ''),
-//                'price' => (float) ($this->data['price'] ?? 0),
                 'price' => (float) ($this->data['tcp'] ?? 0),
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),
                 'amenities' => (string) ($this->data['amenities'] ?? ''),
                 'facade_url' => (string) ($facade ?? ''),
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
-
-//                'percent_dp'=>(float) ($this->data['percent_dp'] ?? 0),
-//                'dp_term'=>(float) ($this->data['dp_term'] ?? 0),
-//                'percent_mf'=>(float) ($this->data['percent_mf'] ?? 0),
             ]
         );
+//
+//        $product->meta->set('percent_down_payment',$this->data['percent_dp']);
+//        $product->meta->set('percent_miscellaneous_fees',$this->data['percent_mf']);
+//        $product->meta->set('down_payment_term',$this->data['dp_term']);
+//        $product->save();
 
-        $product->meta->set('percent_dp',$this->data['percent_dp']);
-        $product->meta->set('percent_mf',$this->data['percent_mf']);
-        $product->meta->set('dp_term',$this->data['dp_term']);
+        $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
+        $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
+        $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
+        $product->save();
 
-//        $product->percent_dp=(float) ($this->data['percent_dp'] ?? 0);
-//        $product->dp_term=(float) ($this->data['dp_term'] ?? 0);
-//        $product->percent_mf=(float) ($this->data['percent_mf'] ?? 0);
+//        dd($product);
 
         // Create or update the Property record based on SKU
         $property = Property::updateOrCreate(
@@ -121,7 +120,6 @@ class ProductsImportImporter extends Importer
                 'lot' => (string) ($this->data['lot'] ?? ''),
                 'floor_area' => (float) ($this->data['floor_area'] ?? 0),
                 'lot_area' => (float) ($this->data['lot_area'] ?? 0),
-//                'building' => (string) ($this->data['building'] ?? ''),
                 'unit_type' => (string) ($this->data['unit_type'] ?? ''),
                 'project_code' => (string) ($this->data['project_code'] ?? ''),
                 'project_location' => (string) ($this->data['project_location'] ?? ''),
@@ -129,18 +127,76 @@ class ProductsImportImporter extends Importer
                 'tcp' => (float) ($this->data['tcp'] ?? 0),
             ]
         );
-//        $property->consultation_fee=(string) ($this->data['consultation_fee'] ?? '');
         $property->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
-        $property->save();
-//        dd($product,$property);
-
-//        dd($product, $property);
-        // Associate the Property with the Product
-        $property->product()->associate($product);
-
         $property->save();
 
         return $property;
+    }
+
+    protected function beforeSave(): void
+    {
+        $facadeUrl = $this->data['facade_url'] ?? null;
+        $product = Product::updateOrCreate(
+            ['sku' => (string) ($this->data['sku'] ?? '')],
+            [
+                'name' => (string) ($this->data['name'] ?? ''),
+                'brand' => (string) ($this->data['brand'] ?? ''),
+                'category' => (string) ($this->data['category'] ?? ''),
+                'description' => (string) ($this->data['description'] ?? ''),
+                'price' => (float) ($this->data['tcp'] ?? 0),
+                'location' => (string) ($this->data['location'] ?? ''),
+                'directions' => (string) ($this->data['directions'] ?? ''),
+                'amenities' => (string) ($this->data['amenities'] ?? ''),
+                'facade_url' => (string) ($facade ?? ''),
+                'destinations' => (string) ($this->data['destinations'] ?? ''),
+            ]
+        );
+        $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
+        $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
+        $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
+        $product->save();
+        $this->record = Property::updateOrCreate(
+            ['code' => (string) ($this->data['code'] ?? '')],
+            [
+                'sku' => (string) ($this->data['sku'] ?? ''),
+                'name' => (string) ($this->data['name'] ?? ''),
+                'type' => (string) ($this->data['type'] ?? ''),
+                'cluster' => (string) ($this->data['cluster'] ?? 0),
+                'phase' => (string) ($this->data['phase'] ?? ''),
+                'block' => (string) ($this->data['block'] ?? ''),
+                'lot' => (string) ($this->data['lot'] ?? ''),
+                'floor_area' => (float) ($this->data['floor_area'] ?? 0),
+                'lot_area' => (float) ($this->data['lot_area'] ?? 0),
+                'unit_type' => (string) ($this->data['unit_type'] ?? ''),
+                'project_code' => (string) ($this->data['project_code'] ?? ''),
+                'project_location' => (string) ($this->data['project_location'] ?? ''),
+                'project_address' => (string) ($this->data['project_address'] ?? ''),
+                'tcp' => (float) ($this->data['tcp'] ?? 0),
+            ]
+        );
+
+        $this->record->phase=(string) ($this->data['phase'] ?? '');
+        $this->record->block=(string) ($this->data['block'] ?? '');
+        $this->record->lot=(string) ($this->data['lot'] ?? '');
+
+        $this->record->floor_area=(string) ($this->data['floor_area'] ?? '');
+        $this->record->lot_area=(string) ($this->data['lot_area'] ?? '');
+
+        $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
+        $this->record->project_code=(string) ($this->data['project_code'] ?? '');
+        $this->record->project_location=(string) ($this->data['project_location'] ?? '');
+        $this->record->project_address=(string) ($this->data['project_address'] ?? '');
+
+        $this->record->bedrooms=(integer) ($this->data['bedrooms'] ?? 0);
+        $this->record->toilets_and_bathrooms=(integer) ($this->data['toilet_and_bathrooms'] ?? 0);
+        $this->record->parking_slots=(integer) ($this->data['parking'] ?? 0);
+        $this->record->carports=(integer) ($this->data['carports'] ?? 0);
+
+
+        $this->record->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
+        $this->record->product()->associate($product);
+        $this->record->save();
+        // Runs before a record is saved to the database.
     }
 
 

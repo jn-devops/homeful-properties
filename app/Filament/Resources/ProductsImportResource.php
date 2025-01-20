@@ -96,6 +96,16 @@ class ProductsImportResource extends Resource
                         Forms\Components\TextInput::make('lot_area')
                             ->label('Lot Area (sqm)')
                             ->numeric(),
+
+                        Forms\Components\TextInput::make('bedrooms')
+                            ->numeric(),
+                         Forms\Components\TextInput::make('toilets_and_bathrooms')
+                             ->numeric(),
+                        Forms\Components\TextInput::make('parking_slots')
+                            ->numeric(),
+                        Forms\Components\TextInput::make('carports')
+                            ->numeric(),
+
                         Forms\Components\TextInput::make('unit_type')
                             ->label('Unit Type')
                             ->maxLength(255),
@@ -114,6 +124,8 @@ class ProductsImportResource extends Resource
                         Forms\Components\TextInput::make('unit_type_interior')
                             ->label('Unit Type Interior')
                             ->maxLength(255),
+
+
 
                     ])
                     ->columnSpan(2)->columns(2),
@@ -205,6 +217,44 @@ class ProductsImportResource extends Resource
                         return $query
                             ->where('meta->floor_area', 'like', "%{$search}%");
                     }),
+
+                Tables\Columns\TextColumn::make('bedrooms')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->bedrooms', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->bedrooms', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('toilets_and_bathrooms')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->toilets_and_bathrooms', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->toilets_and_bathrooms', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('parking_slots')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->parking_slots', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->parking_slots', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('carports')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->carports', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->carports', 'like', "%{$search}%");
+                    }),
+
                 Tables\Columns\TextColumn::make('project_address')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
@@ -313,6 +363,11 @@ class ProductsImportResource extends Resource
                         $data['percent_mf']=$record->product->meta->percent_mf;
                         $data['dp_term']=$record->product->meta->dp_term;
 
+                        $data['bedrooms']=$record->bedrooms;
+                        $data['toilets_and_bathrooms']=$record->toilets_and_bathrooms;
+                        $data['parking_slots']=$record->parking_slots;
+                        $data['carports']=$record->carports;
+
                         return $data;
                     })
                     ->using(function (Model $record, array $data): Model {
@@ -340,6 +395,11 @@ class ProductsImportResource extends Resource
 
 
                         $record->product->save();
+
+                        $record->bedrooms=(integer) ($data['bedrooms'] ?? 0);
+                        $record->toilets_and_bathrooms=(integer) ($data['toilets_and_bathrooms'] ?? 0);
+                        $record->parking_slots=(integer) ($data['parking_slots'] ?? 0);
+                        $record->carports=(integer) ($data['carports'] ?? 0);
 //                        dd($record->product);
 
 //                        dd(

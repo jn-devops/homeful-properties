@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\ProjectsResource\Pages;
 
+use App\Filament\Imports\ProductsImportImporter;
+use App\Filament\Imports\ProjectsImporter;
 use App\Filament\Resources\ProjectsResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
@@ -34,6 +36,8 @@ class ManageProjects extends ManageRecords
 
                     return $project;
                 }),
+            Actions\ImportAction::make()
+                ->importer(ProjectsImporter::class)
         ];
     }
 }
