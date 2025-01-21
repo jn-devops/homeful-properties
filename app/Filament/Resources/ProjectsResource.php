@@ -109,7 +109,8 @@ class ProjectsResource extends Resource
                             ->where('meta->housingType', 'like', "%{$search}%");
                     }),
                 TextColumn::make('licenseNumber')
-                    ->formatStateUsing(fn ($record) => $record->meta->licenseNumber)
+                    ->getStateUsing(fn ($record) => $record->meta->licenseNumber)
+                    // ->formatStateUsing(fn ($record) => $record->meta->licenseNumber)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->licenseNumber', $direction);
@@ -119,7 +120,7 @@ class ProjectsResource extends Resource
                             ->where('meta->licenseNumber', 'like', "%{$search}%");
                     }),
                 TextColumn::make('licenseDate')
-                    ->formatStateUsing(fn ($record) => $record->meta->licenseDate)
+                    ->getStateUsing(fn ($record) => $record->meta->licenseDate)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->licenseDate', $direction);

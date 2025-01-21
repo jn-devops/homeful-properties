@@ -7,6 +7,7 @@ use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Homeful\Properties\Models\Project;
 use Homeful\Property\Enums\MarketSegment;
+use Carbon\Carbon;
 
 class ProjectsImporter extends Importer
 {
@@ -39,6 +40,9 @@ class ProjectsImporter extends Importer
                 ->rules(['max:255']),
             ImportColumn::make('licenseDate')
                 ->guess(['license_date','project_license_date'])
+                ->fillRecordUsing(function (Project $record, string $state): void {
+                    $record->licenseNumber = $state;
+                })
                 ->rules(['max:255']),
             ImportColumn::make('company_code')
                 ->rules(['max:255']),
