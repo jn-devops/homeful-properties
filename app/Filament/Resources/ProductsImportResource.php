@@ -124,7 +124,14 @@ class ProductsImportResource extends Resource
                         Forms\Components\TextInput::make('unit_type_interior')
                             ->label('Unit Type Interior')
                             ->maxLength(255),
-
+                        Forms\Components\TextInput::make('product.status_code')
+                            ->label('Status Code'),
+                        Forms\Components\TextInput::make('key_location')
+                            ->label('Location'),
+                        Forms\Components\TextInput::make('destinations')
+                            ->label('Destination'),
+                        Forms\Components\TextInput::make('amenities')
+                            ->label('Amenities'),
 
 
                     ])
@@ -319,6 +326,65 @@ class ProductsImportResource extends Resource
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
                     ->sortable(),
+
+
+                Tables\Columns\TextColumn::make('status_code')
+                    ->getStateUsing(fn($record) =>$record->product->status_code)
+                    ->label('Status Code')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->status_code', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->status_code', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('key_location')
+                    ->label('Location')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->location', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->location', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('destinations')
+                    ->getStateUsing(fn($record) =>$record->product->destinations)
+                    ->label('Desctination')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->destinations', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->destinations', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('amenities')
+                    ->getStateUsing(fn($record) =>$record->product->amenities)
+                    ->label('Amenities')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->amenities', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->amenities', 'like', "%{$search}%");
+                    }),
+                Tables\Columns\TextColumn::make('facade_url')
+                    ->getStateUsing(fn($record) =>$record->product->facade_url)
+                    ->label('Facade URL')
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->facade_url', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->facade_url', 'like', "%{$search}%");
+                    }),
+
+
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
