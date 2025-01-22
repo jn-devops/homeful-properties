@@ -124,7 +124,7 @@ class ProductsImportResource extends Resource
                         Forms\Components\TextInput::make('unit_type_interior')
                             ->label('Unit Type Interior')
                             ->maxLength(255),
-                        Forms\Components\TextInput::make('product.status_code')
+                        Forms\Components\TextInput::make('status_code')
                             ->label('Status Code'),
                         Forms\Components\TextInput::make('key_location')
                             ->label('Location'),
@@ -340,7 +340,8 @@ class ProductsImportResource extends Resource
                             ->where('meta->status_code', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('key_location')
-                    ->label('Location')
+                    ->getStateUsing(fn($record) =>$record->product->key_location)
+                    ->label('Key Location')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->location', $direction);
@@ -433,6 +434,10 @@ class ProductsImportResource extends Resource
                         $data['toilets_and_bathrooms']=$record->toilets_and_bathrooms;
                         $data['parking_slots']=$record->parking_slots;
                         $data['carports']=$record->carports;
+                        $data['status_code']=$record->product->status_code;
+                        $data['destinations']=$record->product->destinations;
+                        $data['amenities']=$record->product->amenities;
+                        $data['key_location']=$record->product->key_location;
 
                         return $data;
                     })
@@ -458,7 +463,10 @@ class ProductsImportResource extends Resource
                         $record->product->meta->set('percent_dp',$data['percent_dp']);
                         $record->product->meta->set('percent_mf',$data['percent_mf']);
                         $record->product->meta->set('dp_term',$data['dp_term']);
-
+                        $record->product->status_code = $data['status_code'];
+                        $record->product->destinations = $data['destinations'];
+                        $record->product->amenities = $data['amenities'];
+                        $record->product->key_location = $data['key_location'];
 
                         $record->product->save();
 

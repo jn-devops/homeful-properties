@@ -109,6 +109,7 @@ class ProductsImportImporter extends Importer
         $product->status_code= $this->data['status_code'] ?? '';
         $product->destinations= $this->data['destinations'] ?? '';
         $product->amenities= $this->data['amenities'] ?? '';
+        $product->key_location= $this->data['key_location'] ?? '';
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
@@ -164,6 +165,7 @@ class ProductsImportImporter extends Importer
         $product->status_code= $this->data['status_code'] ?? '';
         $product->destinations= $this->data['destinations'] ?? '';
         $product->amenities= $this->data['amenities'] ?? '';
+        $product->key_location= $this->data['key_location'] ?? '';
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
