@@ -72,7 +72,7 @@ class ProjectsImporter extends Importer
         $project->type = $marketSegment;
 
         $project->meta->set('housingType', $this->data['housing_type']);
-        $project->meta->set('licenseNumber', $this->data['housing_type']);
+        $project->meta->set('licenseNumber', $this->data['licenseNumber']);
         $project->meta->set('licenseDate', $this->data['license_date']);
         $project->meta->set('company_code', $this->data['company_code']);
         $project->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
@@ -104,7 +104,7 @@ class ProjectsImporter extends Importer
 
 
         $this->record->meta->set('housingType', $this->data['housing_type']);
-        $this->record->meta->set('licenseNumber', $this->data['housing_type']);
+        $this->record->meta->set('licenseNumber', $this->data['licenseNumber']);
         $this->record->meta->set('licenseDate', $this->data['license_date']);
         $this->record->meta->set('company_code', $this->data['company_code']);
         $this->record->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
