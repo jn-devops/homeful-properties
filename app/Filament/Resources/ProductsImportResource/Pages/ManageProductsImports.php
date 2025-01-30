@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\ProductsImportResource\Pages;
 
+use App\Filament\Exports\PropertyExporter;
 use App\Filament\Resources\ProductsImportResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ManageRecords;
@@ -16,7 +17,9 @@ class ManageProductsImports extends ManageRecords
         return [
             // Actions\CreateAction::make(),
             Actions\ImportAction::make()
-                ->importer(ProductsImportImporter::class)
+                ->importer(ProductsImportImporter::class),
+            Actions\ExportAction::make()
+                ->exporter(PropertyExporter::class),
         ];
     }
 }
