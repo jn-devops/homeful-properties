@@ -62,6 +62,11 @@ class ProductsImportImporter extends Importer
                 ->numeric(),
             ImportColumn::make('percent_mf')
                 ->numeric(),
+            ImportColumn::make('status_code'),
+            ImportColumn::make('key_location'),
+            ImportColumn::make('destinations'),
+            ImportColumn::make('amenities'),
+            ImportColumn::make('facade_url'),
         ];
     }
 
@@ -90,7 +95,7 @@ class ProductsImportImporter extends Importer
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),
                 'amenities' => (string) ($this->data['amenities'] ?? ''),
-                'facade_url' => (string) ($facade ?? ''),
+                'facade_url' => (string) ($facadeUrl ?? ''),
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
             ]
         );
@@ -100,6 +105,11 @@ class ProductsImportImporter extends Importer
 //        $product->meta->set('down_payment_term',$this->data['dp_term']);
 //        $product->save();
 
+        $product->facade_url= $facadeUrl ?? '';
+        $product->status_code= $this->data['status_code'] ?? '';
+        $product->destinations= $this->data['destinations'] ?? '';
+        $product->amenities= $this->data['amenities'] ?? '';
+        $product->key_location= $this->data['key_location'] ?? '';
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
@@ -147,10 +157,15 @@ class ProductsImportImporter extends Importer
                 'location' => (string) ($this->data['location'] ?? ''),
                 'directions' => (string) ($this->data['directions'] ?? ''),
                 'amenities' => (string) ($this->data['amenities'] ?? ''),
-                'facade_url' => (string) ($facade ?? ''),
+                'facade_url' => (string) ($facadeUrl ?? ''),
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
             ]
         );
+        $product->facade_url= $facadeUrl ?? '';
+        $product->status_code= $this->data['status_code'] ?? '';
+        $product->destinations= $this->data['destinations'] ?? '';
+        $product->amenities= $this->data['amenities'] ?? '';
+        $product->key_location= $this->data['key_location'] ?? '';
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
