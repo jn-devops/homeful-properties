@@ -320,9 +320,9 @@ class ProductsImportResource extends Resource
 //                    ->label('Market Segment')
 //                    ->searchable(),
                 Tables\Columns\TextColumn::make('category')
-                    ->getStateUsing(function ($record) {
-                        return "{$record->product->market_segment} {$record->product->brand}";
-                    }),
+                    ->getStateUsing(fn ($record) =>
+                        trim(($record->product->market_segment ?? '') . ' ' . ($record->product->brand ?? ''))
+                    ),
                 Tables\Columns\TextColumn::make('appraised_value')
                     ->numeric()
                     ->sortable(),
