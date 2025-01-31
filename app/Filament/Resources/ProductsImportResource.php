@@ -329,7 +329,7 @@ class ProductsImportResource extends Resource
 
 
                 Tables\Columns\TextColumn::make('status_code')
-                    ->getStateUsing(fn($record) =>$record->product->status_code)
+                    ->getStateUsing(fn($record) =>$record->product->status_code??'')
                     ->label('Status Code')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
