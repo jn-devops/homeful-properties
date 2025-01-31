@@ -340,7 +340,7 @@ class ProductsImportResource extends Resource
                             ->where('meta->status_code', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('key_location')
-                    ->getStateUsing(fn($record) =>$record->product->key_location)
+                    ->getStateUsing(fn($record) =>$record->product->key_location??'')
                     ->label('Key Location')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
@@ -351,7 +351,7 @@ class ProductsImportResource extends Resource
                             ->where('meta->location', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('destinations')
-                    ->getStateUsing(fn($record) =>$record->product->destinations)
+                    ->getStateUsing(fn($record) =>$record->product->destinations??'')
                     ->label('Desctination')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
@@ -362,7 +362,7 @@ class ProductsImportResource extends Resource
                             ->where('meta->destinations', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('amenities')
-                    ->getStateUsing(fn($record) =>$record->product->amenities)
+                    ->getStateUsing(fn($record) =>$record->product->amenities??'')
                     ->label('Amenities')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
@@ -373,7 +373,7 @@ class ProductsImportResource extends Resource
                             ->where('meta->amenities', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('facade_url')
-                    ->getStateUsing(fn($record) =>$record->product->facade_url)
+                    ->getStateUsing(fn($record) =>$record->product->facade_url??'')
                     ->label('Facade URL')
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
