@@ -194,8 +194,8 @@ class ProductsImportImporter extends Importer
         $this->record->block=(string) ($this->data['block'] ?? '');
         $this->record->lot=(string) ($this->data['lot'] ?? '');
 
-        $this->record->floor_area=(string) ($this->data['floor_area'] ?? '');
-        $this->record->lot_area=(string) ($this->data['lot_area'] ?? '');
+        $this->record->floor_area=(float) ($this->data['floor_area'] ?? 0);
+        $this->record->lot_area=(float) ($this->data['lot_area'] ?? 0);
 
         $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
         $this->record->project_code=(string) ($this->data['project_code'] ?? '');
