@@ -132,6 +132,13 @@ class ProductsImportResource extends Resource
                             ->label('Destination'),
                         Forms\Components\TextInput::make('amenities')
                             ->label('Amenities'),
+                        Forms\Components\Textarea::make('project_description')
+                            ->label('Project Description')
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('digital_assets')
+                            ->label('Digital Assets')
+                            ->columnSpanFull(),
+
 
 
                     ])
@@ -383,6 +390,14 @@ class ProductsImportResource extends Resource
                         return $query
                             ->where('meta->facade_url', 'like', "%{$search}%");
                     }),
+                Tables\Columns\TextColumn::make('project_description')
+                    ->getStateUsing(fn($record) =>$record->project_description??'')
+                    ->label('Project Description')
+                    ->words(10),
+                Tables\Columns\TextColumn::make('digital_assets')
+                    ->getStateUsing(fn($record) =>$record->digital_assets??'')
+                    ->label('Digital Assets')
+                    ->limit(70),
 
 
 
@@ -438,6 +453,8 @@ class ProductsImportResource extends Resource
                         $data['destinations']=$record->product->destinations;
                         $data['amenities']=$record->product->amenities;
                         $data['key_location']=$record->product->key_location;
+                        $data['project_description']=$record->project_description;
+                        $data['digital_assets']=$record->digital_assets;
 
                         return $data;
                     })
@@ -467,6 +484,8 @@ class ProductsImportResource extends Resource
                         $record->product->destinations = $data['destinations'];
                         $record->product->amenities = $data['amenities'];
                         $record->product->key_location = $data['key_location'];
+                        $record->product->project_description = $data['project_description'];
+                        $record->product->digital_assets = $data['digital_assets'];
 
                         $record->product->save();
 
