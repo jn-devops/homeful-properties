@@ -62,6 +62,9 @@ class ProjectsResource extends Resource
                 TextInput::make('appraised_lot_value')
                     ->numeric()
                     ->required(),
+                TextInput::make('total_sold')
+                    ->numeric()
+                    ->required(),
             ]);
     }
 
@@ -149,6 +152,8 @@ class ProjectsResource extends Resource
                         return $query
                             ->where('meta->appraised_lot_value', 'like', "%{$search}%");
                     }),
+                TextColumn::make('total_sold')
+                    ->formatStateUsing(fn ($record) => $record->meta->total_sold),
             ])
             ->filters([
                 //
@@ -163,6 +168,7 @@ class ProjectsResource extends Resource
                         $data['licenseDate']=$record->meta->get('licenseDate');
                         $data['company_code']=$record->meta->get('company_code');
                         $data['appraised_lot_value']=$record->meta->get('appraised_lot_value');
+                        $data['total_sold']=$record->meta->get('total_sold');
                         return $data;
                     }),
                 Tables\Actions\DeleteAction::make(),

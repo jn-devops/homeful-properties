@@ -48,6 +48,7 @@ class ProjectsImporter extends Importer
                 ->rules(['max:255']),
             ImportColumn::make('appraised_lot_value')
                 ->rules(['max:255']),
+            ImportColumn::make('total_sold'),
         ];
     }
 
@@ -77,6 +78,7 @@ class ProjectsImporter extends Importer
         $project->meta->set('company_code', $this->data['company_code']);
         $project->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
         $project->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
+        $project->meta->set('total_sold', $this->data['total_sold']);
         $project->save();
         return $project;
     }
@@ -109,6 +111,7 @@ class ProjectsImporter extends Importer
         $this->record->meta->set('company_code', $this->data['company_code']);
         $this->record->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
         $this->record->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
+        $this->record->meta->set('total_sold', $this->data['total_sold']);
         $this->record->save();
     }
 
