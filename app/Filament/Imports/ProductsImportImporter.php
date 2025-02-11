@@ -67,12 +67,15 @@ class ProductsImportImporter extends Importer
             ImportColumn::make('destinations'),
             ImportColumn::make('amenities'),
             ImportColumn::make('facade_url'),
+            ImportColumn::make('project_description'),
+            ImportColumn::make('digital_assets'),
         ];
     }
 
     public function resolveRecord(): ?Property
     {
         $facadeUrl = $this->data['facade_url'] ?? null;
+        // dd($this->data);
 
 //        if ($facadeUrl) {
 //            // Decode the JSON string into an associative array
@@ -206,6 +209,9 @@ class ProductsImportImporter extends Importer
         $this->record->toilets_and_bathrooms=(integer) ($this->data['toilet_and_bathrooms'] ?? 0);
         $this->record->parking_slots=(integer) ($this->data['parking'] ?? 0);
         $this->record->carports=(integer) ($this->data['carports'] ?? 0);
+
+        $this->record->project_description=(string) ($this->data['project_description'] ?? '');
+        $this->record->digital_assets=(string) ($this->data['digital_assets'] ?? '');
 
 
         $this->record->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
