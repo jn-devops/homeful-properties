@@ -3082,16 +3082,16 @@
         },
         {
             "name": "jn-devops/products",
-            "version": "v1.2.8",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/products.git",
-                "reference": "1a3128a987bceb1c95812fc5b3773c90ed3fd5a5"
+                "reference": "194d65a4e778090e58e6f50a97e96067dbf86df0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/products/zipball/1a3128a987bceb1c95812fc5b3773c90ed3fd5a5",
-                "reference": "1a3128a987bceb1c95812fc5b3773c90ed3fd5a5",
+                "url": "https://api.github.com/repos/jn-devops/products/zipball/194d65a4e778090e58e6f50a97e96067dbf86df0",
+                "reference": "194d65a4e778090e58e6f50a97e96067dbf86df0",
                 "shasum": ""
             },
             "require": {
@@ -3151,7 +3151,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/products/issues",
-                "source": "https://github.com/jn-devops/products/tree/v1.2.8"
+                "source": "https://github.com/jn-devops/products/tree/v1.3.1"
             },
             "funding": [
                 {
@@ -3159,20 +3159,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-01-21T11:03:15+00:00"
+            "time": "2025-02-11T04:05:33+00:00"
         },
         {
             "name": "jn-devops/properties",
-            "version": "v1.5.4",
+            "version": "v1.5.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/properties.git",
-                "reference": "f7943d7f52c7a35336fff0a7f2a374030418c4d6"
+                "reference": "ce52b860cb0444ff8d08d03380d5e7cf26903248"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/properties/zipball/f7943d7f52c7a35336fff0a7f2a374030418c4d6",
-                "reference": "f7943d7f52c7a35336fff0a7f2a374030418c4d6",
+                "url": "https://api.github.com/repos/jn-devops/properties/zipball/ce52b860cb0444ff8d08d03380d5e7cf26903248",
+                "reference": "ce52b860cb0444ff8d08d03380d5e7cf26903248",
                 "shasum": ""
             },
             "require": {
@@ -3233,7 +3233,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/properties/issues",
-                "source": "https://github.com/jn-devops/properties/tree/v1.5.4"
+                "source": "https://github.com/jn-devops/properties/tree/v1.5.5"
             },
             "funding": [
                 {
@@ -3241,7 +3241,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-11T00:26:06+00:00"
+            "time": "2025-02-11T05:16:14+00:00"
         },
         {
             "name": "jn-devops/property",

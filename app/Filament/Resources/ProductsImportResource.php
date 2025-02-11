@@ -391,11 +391,11 @@ class ProductsImportResource extends Resource
                             ->where('meta->facade_url', 'like', "%{$search}%");
                     }),
                 Tables\Columns\TextColumn::make('project_description')
-                    ->getStateUsing(fn($record) =>$record->project_description??'')
+                    ->getStateUsing(fn($record) =>$record->project->project_description??'')
                     ->label('Project Description')
                     ->words(10),
                 Tables\Columns\TextColumn::make('digital_assets')
-                    ->getStateUsing(fn($record) =>$record->digital_assets??'')
+                    ->getStateUsing(fn($record) =>$record->product->digital_assets??'')
                     ->label('Digital Assets')
                     ->limit(70),
 
@@ -453,8 +453,8 @@ class ProductsImportResource extends Resource
                         $data['destinations']=$record->product->destinations;
                         $data['amenities']=$record->product->amenities;
                         $data['key_location']=$record->product->key_location;
-                        $data['project_description']=$record->project_description;
-                        $data['digital_assets']=$record->digital_assets;
+                        $data['project_description']=$record->project->project_description;
+                        $data['digital_assets']=$record->product->digital_assets;
 
                         return $data;
                     })
@@ -475,6 +475,7 @@ class ProductsImportResource extends Resource
                         $record->project_code = $data['project_code'];
                         $record->project_location = $data['project_location'];
                         $record->project_address = $data['project_address'];
+                        $record->project->project_description = $data['project_description'];
                         $record->product->facade_url = $data['facade_url'];
 
                         $record->product->meta->set('percent_dp',$data['percent_dp']);
@@ -484,9 +485,9 @@ class ProductsImportResource extends Resource
                         $record->product->destinations = $data['destinations'];
                         $record->product->amenities = $data['amenities'];
                         $record->product->key_location = $data['key_location'];
-                        $record->product->project_description = $data['project_description'];
                         $record->product->digital_assets = $data['digital_assets'];
 
+                        $record->project->save();
                         $record->product->save();
 
                         $record->bedrooms=(integer) ($data['bedrooms'] ?? 0);

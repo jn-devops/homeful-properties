@@ -116,6 +116,7 @@ class ProductsImportImporter extends Importer
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
+        $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
         $product->save();
 
 //        dd($product);
@@ -141,6 +142,13 @@ class ProductsImportImporter extends Importer
             ]
         );
         $property->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
+
+        $project = $property->project;
+        if ($project) {
+            $project->project_description = (string) ($this->data['project_description'] ?? '');
+            $project->save();
+        }
+
         $property->save();
 
         return $property;
@@ -172,7 +180,9 @@ class ProductsImportImporter extends Importer
         $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
+        $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
         $product->save();
+
         $this->record = Property::updateOrCreate(
             ['code' => (string) ($this->data['code'] ?? '')],
             [
@@ -210,12 +220,13 @@ class ProductsImportImporter extends Importer
         $this->record->parking_slots=(integer) ($this->data['parking'] ?? 0);
         $this->record->carports=(integer) ($this->data['carports'] ?? 0);
 
-        $this->record->project_description=(string) ($this->data['project_description'] ?? '');
-        $this->record->digital_assets=(string) ($this->data['digital_assets'] ?? '');
-
-
         $this->record->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
         $this->record->product()->associate($product);
+        $project = $this->record->project;
+        if ($project) {
+            $project->project_description = (string) ($this->data['project_description'] ?? '');
+            $project->save();
+        }
         $this->record->save();
         // Runs before a record is saved to the database.
     }

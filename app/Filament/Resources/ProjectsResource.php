@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use Filament\Forms;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -65,6 +66,8 @@ class ProjectsResource extends Resource
                 TextInput::make('total_sold')
                     ->numeric()
                     ->required(),
+                Textarea::make('project_description')
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -154,6 +157,9 @@ class ProjectsResource extends Resource
                     }),
                 TextColumn::make('total_sold')
                     ->formatStateUsing(fn ($record) => $record->meta->total_sold),
+                TextColumn::make('project_description')
+                    ->formatStateUsing(fn ($record) => $record->meta->project_description)
+                    ->words(15),
             ])
             ->filters([
                 //
@@ -169,6 +175,7 @@ class ProjectsResource extends Resource
                         $data['company_code']=$record->meta->get('company_code');
                         $data['appraised_lot_value']=$record->meta->get('appraised_lot_value');
                         $data['total_sold']=$record->meta->get('total_sold');
+                        $data['project_description']=$record->meta->get('project_description');
                         return $data;
                     }),
                 Tables\Actions\DeleteAction::make(),
