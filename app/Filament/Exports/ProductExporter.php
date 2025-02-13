@@ -88,9 +88,24 @@ class ProductExporter extends Exporter
                 ->state(function (Product $record) {
                     return $record->meta->get('digital_assets');
                 }),
+            ExportColumn::make('percent_gmi')
+                ->state(function (Product $record) {
+                    return $record->meta->get('percent_gmi');
+                }),
+            ExportColumn::make('max_age')
+                ->state(function (Product $record) {
+                    return $record->meta->get('max_age');
+                }),
+            ExportColumn::make('interest_rate')
+                ->state(function (Product $record) {
+                    return $record->meta->get('interest_rate');
+                }),
+            ExportColumn::make('mortgage_redemption_insurance_fee')
+                ->state(function (Product $record) {
+                    return $record->meta->get('mortgage_redemption_insurance_fee');
+                }),
         ];
     }
-
     public static function getCompletedNotificationBody(Export $export): string
     {
         $body = 'Your product export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
