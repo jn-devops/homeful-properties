@@ -33,6 +33,10 @@ class ProductImporter extends Importer
             ImportColumn::make('percent_mf'),
             ImportColumn::make('key_location'),
             ImportColumn::make('digital_assets'),
+            ImportColumn::make('percent_gmi'),
+            ImportColumn::make('max_age'),
+            ImportColumn::make('interest_rate'),
+            ImportColumn::make('mrif'),
         ];
     }
 
@@ -65,6 +69,12 @@ class ProductImporter extends Importer
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
         $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
+
+        $product->percent_gross_montly_income = (float) ($this->data['percent_gmi'] ?? 0);
+        $product->interest_rate = (float) ($this->data['interest_rate'] ?? 0);
+        $product->max_age = (float) ($this->data['max_age'] ?? 0);
+        $product->mortgage_redemption_insurance_fee = (float) ($this->data['mrif'] ?? 0);
+
         $product->save();
 
         return $product;
@@ -97,6 +107,12 @@ class ProductImporter extends Importer
         $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
         $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
+
+        $product->percent_gross_montly_income = (float) ($this->data['percent_gmi'] ?? 0);
+        $product->interest_rate = (float) ($this->data['interest_rate'] ?? 0);
+        $product->max_age = (float) ($this->data['max_age'] ?? 0);
+        $product->mortgage_redemption_insurance_fee = (float) ($this->data['mrif'] ?? 0);
+
         $product->save();
     }
 
