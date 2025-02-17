@@ -13,6 +13,7 @@
         "jn-devops/properties": "^1.3",
         "jn-devops/property": "^1.1",
         "laravel/framework": "^11.9",
+        "laravel/pulse": "^1.4",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "lorisleiva/laravel-actions": "^2.8"
