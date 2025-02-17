@@ -93,6 +93,8 @@ class ProductImporter extends Importer
         $product->house_type=(string) ($this->data['house_type'] ?? '');
         $product->unit_type=(string) ($this->data['unit_type'] ?? '');
         $product->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
+        $product->floor_area = (float) ($this->data['floor_area'] ?? 0);
+        $product->lot_area = (float) ($this->data['lot_area'] ?? 0);
 
         $product->save();
         return $product;
@@ -141,6 +143,9 @@ class ProductImporter extends Importer
         $this->record->house_type=(string) ($this->data['house_type'] ?? '');
         $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
         $this->record->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
+        $this->record->floor_area = (float) ($this->data['floor_area'] ?? 0);
+        $this->record->lot_area = (float) ($this->data['floor_area'] ?? 0);
+
         $this->record->save();
     }
 
