@@ -47,6 +47,12 @@ class ProductsResource extends Resource
                         Forms\Components\TextInput::make('percent_down_payment'),
                         Forms\Components\TextInput::make('down_payment_term'),
                         Forms\Components\TextInput::make('percent_miscellaneous_fees'),
+                        Forms\Components\TextInput::make('interest_rate'),
+                        Forms\Components\TextInput::make('percent_gross_monthly_income'),
+                        Forms\Components\TextInput::make('max_age'),
+                        Forms\Components\TextInput::make('mortgage_redemption_insurance_fee'),
+                        Forms\Components\TextInput::make('income_requirement_multiplier'),
+                        Forms\Components\TextInput::make('maximum_paying_age'),
                         Forms\Components\TextInput::make('key_location'),
                         Forms\Components\TextInput::make('digital_assets'),
                     ])
@@ -59,8 +65,8 @@ class ProductsResource extends Resource
             ->columns([
                 TextColumn::make('sku')
                     ->label('SKU'),
-                TextColumn::make('sku')
-                    ->label('SKU'),
+                TextColumn::make('project_code')
+                    ->label('Project Code'),
                 TextColumn::make('name')
                     ->label('Name'),
                 TextColumn::make('brand')
@@ -93,6 +99,18 @@ class ProductsResource extends Resource
                     ->label('Down Payment Term'),
                 TextColumn::make('percent_miscellaneous_fees')
                     ->label('Percent Miscellaneous Fees'),
+                TextColumn::make('interest_rate')
+                    ->label('Interest Rate'),
+                TextColumn::make('max_age')
+                    ->label('Max Age'),
+                TextColumn::make('percent_gmi')
+                    ->label('Percent GMI'),
+                TextColumn::make('mortgage_redemption_insurance_fee')
+                    ->label('MRIF'),
+                TextColumn::make('income_requirement_multiplier')
+                    ->label('Income Requirement Multiplier'),
+                TextColumn::make('maximum_paying_age')
+                    ->label('Maximum Paying Age'),
                 TextColumn::make('key_location')
                     ->label('Key Location'),
                 TextColumn::make('digital_assets')

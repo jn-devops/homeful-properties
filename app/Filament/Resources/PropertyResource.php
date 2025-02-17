@@ -37,6 +37,10 @@ class PropertyResource extends Resource
                             ->label('SKU')
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('project_code')
+                            ->label('Project Code')
+                            ->required()
+                            ->maxLength(255),
                         Forms\Components\TextInput::make('name')
                             ->label('Property Name')
                             ->required()
@@ -129,6 +133,8 @@ class PropertyResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at','desc')
+            ->defaultPaginationPageOption(50)
             ->columns([
                 Tables\Columns\TextColumn::make('sku')
                     ->label('SKU')

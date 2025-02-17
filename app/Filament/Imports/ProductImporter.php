@@ -15,11 +15,13 @@ class ProductImporter extends Importer
     {
         return [
             ImportColumn::make('sku'),
+            ImportColumn::make('project_code'),
             ImportColumn::make('name'),
             ImportColumn::make('brand'),
             ImportColumn::make('category'),
             ImportColumn::make('description'),
-            ImportColumn::make('price'),
+            ImportColumn::make('price')
+                ->guess(['typical_price','price']),
             ImportColumn::make('destinations'),
             ImportColumn::make('directions'),
             ImportColumn::make('amenities'),
@@ -35,16 +37,23 @@ class ProductImporter extends Importer
             ImportColumn::make('digital_assets'),
             ImportColumn::make('percent_gmi'),
             ImportColumn::make('max_age'),
-            ImportColumn::make('interest_rate'),
+            ImportColumn::make('balance_payment_interest_rate')
+                ->guess(['interest_rate','bp_interest_rate']),
             ImportColumn::make('mrif'),
+            ImportColumn::make('income_requirement_multiplier')
+            ->guess(['income_requirement_multiplier']),
+            ImportColumn::make('maximum_paying_age'),
+            ImportColumn::make('balance_payment_term')
+                ->guess(['bp_term']),
+            ImportColumn::make('processing_fee'),
         ];
     }
+
 
     public function resolveRecord(): ?Product
     {
         $facadeUrl = $this->data['facade_url'] ?? null;
-
-        $product = Product::updateOrCreate(
+        $product = Product::firstOrNew(
             ['sku' => (string) ($this->data['sku'] ?? '')],
             [
                 'name' => (string) ($this->data['name'] ?? ''),
@@ -58,7 +67,6 @@ class ProductImporter extends Importer
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
             ]
         );
-
         $product->facade_url= $facadeUrl ?? '';
         $product->directions= $this->data['directions'] ?? '';
         $product->destinations= $this->data['destinations'] ?? '';
@@ -70,20 +78,25 @@ class ProductImporter extends Importer
         $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
         $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
 
-        $product->percent_gross_montly_income = (float) ($this->data['percent_gmi'] ?? 0);
-        $product->interest_rate = (float) ($this->data['interest_rate'] ?? 0);
+        $product->percent_gross_monthly_income = (float) ($this->data['percent_gmi'] ?? 0);
+        $product->balance_payment_interest_rate = (float) ($this->data['balance_payment_interest_rate'] ?? 0);
         $product->max_age = (float) ($this->data['max_age'] ?? 0);
         $product->mortgage_redemption_insurance_fee = (float) ($this->data['mrif'] ?? 0);
-
+        $product->maximum_paying_age = (float) ($this->data['maximum_paying_age'] ?? 0);
+        $product->income_requirement_multiplier = (float) ($this->data['income_requirement_multiplier'] ?? 0);
+        $product->processing_fee = (float) ($this->data['processing_fee'] ?? 0);
+        $product->price = (float) ($this->data['typical_price'] ?? 0);
+        $product->project_code=(string) ($this->data['project_code'] ?? '');
+        $product->unit_type=(string) ($this->data['unit_type'] ?? '');
         $product->save();
-
         return $product;
+//        return new Product();
     }
 
     protected function beforeSave(): void
     {
         $facadeUrl = $this->data['facade_url'] ?? null;
-        $product = Product::updateOrCreate(
+        $this->record = Product::firstOrCreate(
             ['sku' => (string) ($this->data['sku'] ?? '')],
             [
                 'name' => (string) ($this->data['name'] ?? ''),
@@ -98,22 +111,28 @@ class ProductImporter extends Importer
                 'destinations' => (string) ($this->data['destinations'] ?? ''),
             ]
         );
-        $product->facade_url= $facadeUrl ?? '';
-        $product->status_code= $this->data['status_code'] ?? '';
-        $product->destinations= $this->data['destinations'] ?? '';
-        $product->amenities= $this->data['amenities'] ?? '';
-        $product->key_location= $this->data['key_location'] ?? '';
-        $product->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
-        $product->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
-        $product->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
-        $product->digital_assets=(string) ($this->data['digital_assets'] ?? '');
+        $this->record->facade_url= $facadeUrl ?? '';
+        $this->record->directions= $this->data['directions'] ?? '';
+        $this->record->destinations= $this->data['destinations'] ?? '';
+        $this->record->amenities= $this->data['amenities'] ?? '';
 
-        $product->percent_gross_montly_income = (float) ($this->data['percent_gmi'] ?? 0);
-        $product->interest_rate = (float) ($this->data['interest_rate'] ?? 0);
-        $product->max_age = (float) ($this->data['max_age'] ?? 0);
-        $product->mortgage_redemption_insurance_fee = (float) ($this->data['mrif'] ?? 0);
+        $this->record->key_location= $this->data['key_location'] ?? '';
+        $this->record->percent_down_payment=(float) ($this->data['percent_dp'] ?? 0);
+        $this->record->down_payment_term=(float) ($this->data['dp_term'] ?? 0);
+        $this->record->percent_miscellaneous_fees=(float) ($this->data['percent_mf'] ?? 0);
+        $this->record->digital_assets=(string) ($this->data['digital_assets'] ?? '');
 
-        $product->save();
+        $this->record->percent_gross_monthly_income = (float) ($this->data['percent_gmi'] ?? 0);
+        $this->record->balance_payment_interest_rate = (float) ($this->data['balance_payment_interest_rate'] ?? 0);
+        $this->record->max_age = (float) ($this->data['max_age'] ?? 0);
+        $this->record->mortgage_redemption_insurance_fee = (float) ($this->data['mrif'] ?? 0);
+        $this->record->maximum_paying_age = (float) ($this->data['maximum_paying_age'] ?? 0);
+        $this->record->income_requirement_multiplier = (float) ($this->data['income_requirement_multiplier'] ?? 0);
+        $this->record->processing_fee = (float) ($this->data['processing_fee'] ?? 0);
+        $this->record->price = (float) ($this->data['typical_price'] ?? 0);
+        $this->record->project_code=(string) ($this->data['project_code'] ?? '');
+        $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
+        $this->record->save();
     }
 
     public static function getCompletedNotificationBody(Import $import): string
