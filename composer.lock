@@ -3081,16 +3081,16 @@
         },
         {
             "name": "jn-devops/products",
-            "version": "v1.3.7",
+            "version": "v1.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/products.git",
-                "reference": "c03f3879b67fd320d1823f1f523c71f266dfcf3c"
+                "reference": "48ec629f80c54d436b8914898f6f8d1886aea350"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/products/zipball/c03f3879b67fd320d1823f1f523c71f266dfcf3c",
-                "reference": "c03f3879b67fd320d1823f1f523c71f266dfcf3c",
+                "url": "https://api.github.com/repos/jn-devops/products/zipball/48ec629f80c54d436b8914898f6f8d1886aea350",
+                "reference": "48ec629f80c54d436b8914898f6f8d1886aea350",
                 "shasum": ""
             },
             "require": {
@@ -3150,7 +3150,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/products/issues",
-                "source": "https://github.com/jn-devops/products/tree/v1.3.7"
+                "source": "https://github.com/jn-devops/products/tree/v1.3.8"
             },
             "funding": [
                 {
@@ -3158,7 +3158,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-17T04:55:41+00:00"
+            "time": "2025-02-17T06:52:09+00:00"
         },
         {
             "name": "jn-devops/properties",

@@ -42,6 +42,8 @@ class ProductsResource extends Resource
                         Forms\Components\TextInput::make('facade_url'),
                         Forms\Components\TextInput::make('lot_area'),
                         Forms\Components\TextInput::make('floor_area'),
+                        Forms\Components\TextInput::make('property_type'),
+                        Forms\Components\TextInput::make('house_type'),
                         Forms\Components\TextInput::make('unit_type'),
                         Forms\Components\TextInput::make('appraised_value'),
                         Forms\Components\TextInput::make('percent_down_payment'),
@@ -62,6 +64,8 @@ class ProductsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at','desc')
+            ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('sku')
                     ->label('SKU'),
@@ -77,6 +81,8 @@ class ProductsResource extends Resource
                     ->label('Description'),
                 TextColumn::make('price')
                     ->label('Price'),
+                TextColumn::make('processing_fee')
+                    ->label('Processing Fee'),
                 TextColumn::make('destinations')
                     ->label('Destinations'),
                 TextColumn::make('directions')
@@ -89,6 +95,10 @@ class ProductsResource extends Resource
                     ->label('Lot Area'),
                 TextColumn::make('floor_area')
                     ->label('Floor Area'),
+                TextColumn::make('property_type')
+                    ->label('Property Type'),
+                TextColumn::make('house_type')
+                    ->label('House Type'),
                 TextColumn::make('unit_type')
                     ->label('Unit Type'),
                 TextColumn::make('appraised_value')
@@ -97,13 +107,15 @@ class ProductsResource extends Resource
                     ->label('Percent Down Payment'),
                 TextColumn::make('down_payment_term')
                     ->label('Down Payment Term'),
+                TextColumn::make('balance_payment_term')
+                    ->label('Balance Payment Term'),
                 TextColumn::make('percent_miscellaneous_fees')
                     ->label('Percent Miscellaneous Fees'),
-                TextColumn::make('interest_rate')
+                TextColumn::make('balance_payment_interest_rate')
                     ->label('Interest Rate'),
                 TextColumn::make('max_age')
                     ->label('Max Age'),
-                TextColumn::make('percent_gmi')
+                TextColumn::make('percent_gross_monthly_income')
                     ->label('Percent GMI'),
                 TextColumn::make('mortgage_redemption_insurance_fee')
                     ->label('MRIF'),
@@ -123,7 +135,7 @@ class ProductsResource extends Resource
                 Tables\Actions\EditAction::make()
                     ->mutateRecordDataUsing(function (array $data ,Product $record) {
                         $data['brand']=$record->brand;
-    //                        $data['market_segment']=$record->product->market_segment;
+                        //                        $data['market_segment']=$record->product->market_segment;
                         $data['price']=$record->price->getAmount()->toFloat();
 
                         $data['floor_area']=$record->meta->floor_area;

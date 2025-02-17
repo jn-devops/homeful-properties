@@ -28,6 +28,8 @@ class ProductImporter extends Importer
             ImportColumn::make('facade_url'),
             ImportColumn::make('lot_area'),
             ImportColumn::make('floor_area'),
+            ImportColumn::make('property_type'),
+            ImportColumn::make('house_type'),
             ImportColumn::make('unit_type'),
             ImportColumn::make('appraised_value'),
             ImportColumn::make('percent_dp'),
@@ -87,7 +89,11 @@ class ProductImporter extends Importer
         $product->processing_fee = (float) ($this->data['processing_fee'] ?? 0);
         $product->price = (float) ($this->data['typical_price'] ?? 0);
         $product->project_code=(string) ($this->data['project_code'] ?? '');
+        $product->property_type=(string) ($this->data['property_type'] ?? '');
+        $product->house_type=(string) ($this->data['house_type'] ?? '');
         $product->unit_type=(string) ($this->data['unit_type'] ?? '');
+        $product->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
+
         $product->save();
         return $product;
 //        return new Product();
@@ -131,7 +137,10 @@ class ProductImporter extends Importer
         $this->record->processing_fee = (float) ($this->data['processing_fee'] ?? 0);
         $this->record->price = (float) ($this->data['typical_price'] ?? 0);
         $this->record->project_code=(string) ($this->data['project_code'] ?? '');
+        $this->record->property_type=(string) ($this->data['property_type'] ?? '');
+        $this->record->house_type=(string) ($this->data['house_type'] ?? '');
         $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
+        $this->record->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
         $this->record->save();
     }
 
