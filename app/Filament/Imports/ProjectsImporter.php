@@ -44,7 +44,23 @@ class ProjectsImporter extends Importer
                     $record->licenseNumber = $state;
                 })
                 ->rules(['max:255']),
+            ImportColumn::make('company_name')
+                ->rules(['max:255']),
             ImportColumn::make('company_code')
+                ->rules(['max:255']),
+            ImportColumn::make('company_tin')
+                ->rules(['max:255']),
+            ImportColumn::make('company_address')
+                ->rules(['max:255']),
+            ImportColumn::make('pagibig_filing_site')
+                ->rules(['max:255']),
+            ImportColumn::make('exec_position')
+                ->rules(['max:255']),
+            ImportColumn::make('exec_signatory')
+                ->rules(['max:255']),
+            ImportColumn::make('exec_tin')
+                ->rules(['max:255']),
+            ImportColumn::make('board_resolution_date')
                 ->rules(['max:255']),
             ImportColumn::make('appraised_lot_value')
                 ->rules(['max:255']),
@@ -79,6 +95,14 @@ class ProjectsImporter extends Importer
         $project->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
         $project->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
         $project->meta->set('total_sold', $this->data['total_sold']);
+        $project->company_name = $this->data['company_name'];
+        $project->company_tin = $this->data['company_tin'];
+        $project->company_address = $this->data['company_address'];
+        $project->pagibig_filing_site = $this->data['pagibig_filing_site'];
+        $project->exec_position = $this->data['exec_position'];
+        $project->exec_signatory = $this->data['exec_signatory'];
+        $project->exec_tin = $this->data['exec_tin'];
+        $project->meta->set('board_resolution_date', $this->data['board_resolution_date']);
         $project->save();
         return $project;
     }
@@ -112,6 +136,14 @@ class ProjectsImporter extends Importer
         $this->record->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
         $this->record->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
         $this->record->meta->set('total_sold', $this->data['total_sold']);
+        $this->company_name = $this->data['company_name'];
+        $this->company_tin = $this->data['company_tin'];
+        $this->company_address = $this->data['company_address'];
+        $this->pagibig_filing_site = $this->data['pagibig_filing_site'];
+        $this->exec_position = $this->data['exec_position'];
+        $this->exec_signatory = $this->data['exec_signatory'];
+        $this->exec_tin = $this->data['exec_tin'];
+        $this->meta->set('board_resolution_date', $this->data['board_resolution_date']);
         $this->record->save();
     }
 

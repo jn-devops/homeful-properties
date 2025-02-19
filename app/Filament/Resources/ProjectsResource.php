@@ -62,7 +62,31 @@ class ProjectsResource extends Resource
                 TextInput::make('licenseDate')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('company_name')
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('company_code')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('company_tin')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('company_address')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('pagibig_filing_site')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('exec_position')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('exec_signatory')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('exec_tin')
+                    ->required()
+                    ->maxLength(255),
+                TextInput::make('board_resolution_date')
                     ->required()
                     ->maxLength(255),
                 TextInput::make('appraised_lot_value')
@@ -140,6 +164,16 @@ class ProjectsResource extends Resource
                         return $query
                             ->where('meta->licenseDate', 'like', "%{$search}%");
                     }),
+                TextColumn::make('company_name')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->company_name', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->company_name', 'like', "%{$search}%");
+                    }),
                 TextColumn::make('company_code')
                     ->formatStateUsing(fn ($record) => $record->meta->company_code)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
@@ -149,6 +183,76 @@ class ProjectsResource extends Resource
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
                             ->where('meta->company_code', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('company_tin')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->company_tin', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->company_tin', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('company_address')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->company_address', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->company_address', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('pagibig_filing_site')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->pagibig_filing_site', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->pagibig_filing_site', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('exec_position')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->exec_position', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->exec_position', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('exec_signatory')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->exec_signatory', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->exec_signatory', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('exec_tin')
+                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->exec_tin', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->exec_tin', 'like', "%{$search}%");
+                    }),
+                TextColumn::make('board_resolution_date')
+                    ->getStateUsing(fn ($record) => $record->meta->licenseDate)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->board_resolution_date', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->board_resolution_date', 'like', "%{$search}%");
                     }),
                 TextColumn::make('appraised_lot_value')
                     ->formatStateUsing(fn ($record) => $record->meta->appraised_lot_value)
