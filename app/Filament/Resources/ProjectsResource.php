@@ -103,6 +103,8 @@ class ProjectsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultSort('created_at', 'desc')
+            ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('code')
                     ->searchable()
