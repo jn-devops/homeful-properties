@@ -167,7 +167,7 @@ class ProjectsResource extends Resource
                             ->where('meta->licenseDate', 'like', "%{$search}%");
                     }),
                 TextColumn::make('company_name')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->company_name)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->company_name', $direction);
