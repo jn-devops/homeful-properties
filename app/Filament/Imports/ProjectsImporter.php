@@ -7,7 +7,7 @@ use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 use Homeful\Properties\Models\Project;
 use Homeful\Property\Enums\MarketSegment;
-use Carbon\Carbon;
+use Illuminate\Support\Carbon;
 
 class ProjectsImporter extends Importer
 {
@@ -70,46 +70,64 @@ class ProjectsImporter extends Importer
 
     public function resolveRecord(): ?Project
     {
-        $project = Project::firstOrCreate(
-            [
-                'name' => $this->data['project_name'],
-                'code'=>$this->data['project_code'],
-            ],[
-            'location'=>$this->data['project_location'],
-        ]);
-        $project->meta->set('address', $this->data['project_address']);
+        try {
+            $project = Project::firstOrNew(
+                [
+                    'name' => $this->data['project_name'],
+                    'code'=>$this->data['project_code'],
+                ],[
+                'location'=>$this->data['project_location'],
+            ]);
+            $project->meta->set('address', $this->data['project_address']??'');
 //        $project->meta->set('type',strtoupper($this->data['project_type']));
-        $marketSegment = match (strtoupper($this->data['project_type'])) {
-            'OPEN' => MarketSegment::OPEN,
-            'ECONOMIC' => MarketSegment::ECONOMIC,
-            'SOCIALIZED' => MarketSegment::SOCIALIZED,
-            default => throw new \InvalidArgumentException("Invalid MarketSegment: {$this->data['project_type']}"),
-        };
+//        $marketSegment = match (strtoupper($this->data['project_type'])) {
+//            'OPEN' => MarketSegment::OPEN,
+//            'ECONOMIC' => MarketSegment::ECONOMIC,
+//            'SOCIALIZED' => MarketSegment::SOCIALIZED,
+//            default => throw new \InvalidArgumentException("Invalid MarketSegment: {$this->data['project_type']}"),
+//        };
 //        $project->meta->set('type', $marketSegment);
-        $project->type = $marketSegment;
+//        $project->type = $marketSegment;
 
-        $project->meta->set('housingType', $this->data['housing_type']);
-        $project->meta->set('licenseNumber', $this->data['licenseNumber']);
-        $project->meta->set('licenseDate', $this->data['license_date']);
-        $project->meta->set('company_code', $this->data['company_code']);
-        $project->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
-        $project->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
-        $project->meta->set('total_sold', $this->data['total_sold']);
-        $project->company_name = $this->data['company_name'];
-        $project->company_tin = $this->data['company_tin'];
-        $project->company_address = $this->data['company_address'];
-        $project->pagibig_filing_site = $this->data['pagibig_filing_site'];
-        $project->exec_position = $this->data['exec_position'];
-        $project->exec_signatory = $this->data['exec_signatory'];
-        $project->exec_tin = $this->data['exec_tin'];
-        $project->meta->set('board_resolution_date', $this->data['board_resolution_date']);
-        $project->save();
+            $project->meta->set('housingType', $this->data['housing_type']??'');
+            $project->meta->set('licenseNumber', $this->data['licenseNumber']??'');
+
+//            $project->meta->set('licenseDate', $this->data['license_date']);
+            $project->meta->set('license_date',
+                !empty($this->data['license_date'])
+                    ? Carbon::parse($this->data['license_date'])
+                    : null
+            );
+
+            $project->meta->set('company_code', $this->data['company_code']??'');
+            $project->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
+            $project->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
+            $project->meta->set('total_sold', $this->data['total_sold']);
+
+            $project->meta->set('company_name', $this->data['company_name']??'');
+            $project->meta->set('company_tin', $this->data['company_tin']??'');
+            $project->meta->set('company_address', $this->data['company_address']??'');
+            $project->meta->set('pagibig_filing_site', $this->data['pagibig_filing_site']??'');
+            $project->meta->set('exec_position', $this->data['exec_position']??'');
+            $project->meta->set('exec_signatory', $this->data['exec_signatory']??'');
+            $project->meta->set('exec_tin', $this->data['exec_tin']??'');
+            $project->board_resolution_date = !empty($this->data['board_resolution_date'])
+                ? Carbon::parse($this->data['board_resolution_date'])
+                : null;
+
+            $project->save();
+
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
         return $project;
     }
 
     public function beforeSave(): void
     {
-        $this->record = Project::firstOrCreate(
+        $this->record = Project::firstOrNew(
             [
                 'name' => $this->data['project_name'],
                 'code'=>$this->data['project_code'],
@@ -143,7 +161,10 @@ class ProjectsImporter extends Importer
         $this->exec_position = $this->data['exec_position'];
         $this->exec_signatory = $this->data['exec_signatory'];
         $this->exec_tin = $this->data['exec_tin'];
-        $this->meta->set('board_resolution_date', $this->data['board_resolution_date']);
+        $this->record->board_resolution_date = !empty($this->data['board_resolution_date'])
+            ? Carbon::parse($this->data['board_resolution_date'])
+            : null;
+
         $this->record->save();
     }
 
