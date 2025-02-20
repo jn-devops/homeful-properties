@@ -187,7 +187,7 @@ class ProjectsResource extends Resource
                             ->where('meta->company_code', 'like', "%{$search}%");
                     }),
                 TextColumn::make('company_tin')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->company_tin)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->company_tin', $direction);
@@ -197,7 +197,7 @@ class ProjectsResource extends Resource
                             ->where('meta->company_tin', 'like', "%{$search}%");
                     }),
                 TextColumn::make('company_address')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->company_address)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->company_address', $direction);
@@ -207,7 +207,7 @@ class ProjectsResource extends Resource
                             ->where('meta->company_address', 'like', "%{$search}%");
                     }),
                 TextColumn::make('pagibig_filing_site')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->pagibig_filing_site)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->pagibig_filing_site', $direction);
@@ -217,7 +217,7 @@ class ProjectsResource extends Resource
                             ->where('meta->pagibig_filing_site', 'like', "%{$search}%");
                     }),
                 TextColumn::make('exec_position')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->exec_position)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->exec_position', $direction);
@@ -227,7 +227,7 @@ class ProjectsResource extends Resource
                             ->where('meta->exec_position', 'like', "%{$search}%");
                     }),
                 TextColumn::make('exec_signatory')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->exec_signatory)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->exec_signatory', $direction);
@@ -237,7 +237,7 @@ class ProjectsResource extends Resource
                             ->where('meta->exec_signatory', 'like', "%{$search}%");
                     }),
                 TextColumn::make('exec_tin')
-                    ->formatStateUsing(fn ($record) => $record->meta->company_code)
+                    ->formatStateUsing(fn ($record) => $record->meta->exec_tin)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->exec_tin', $direction);
@@ -247,7 +247,7 @@ class ProjectsResource extends Resource
                             ->where('meta->exec_tin', 'like', "%{$search}%");
                     }),
                 TextColumn::make('board_resolution_date')
-                    ->getStateUsing(fn ($record) => $record->meta->licenseDate)
+                    ->getStateUsing(fn ($record) => $record->meta->board_resolution_date)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->board_resolution_date', $direction);
