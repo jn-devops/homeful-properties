@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Homeful\Properties\Models\Project;
+use Illuminate\Support\Carbon;
 
 class ProjectsResource extends Resource
 {
@@ -157,7 +158,7 @@ class ProjectsResource extends Resource
                             ->where('meta->licenseNumber', 'like', "%{$search}%");
                     }),
                 TextColumn::make('licenseDate')
-                    ->getStateUsing(fn ($record) => $record->meta->licenseDate)
+                    ->getStateUsing(fn ($record) =>Carbon::parse($record->meta->license_date)->format('Y-m-d') )
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->licenseDate', $direction);
@@ -247,7 +248,7 @@ class ProjectsResource extends Resource
                             ->where('meta->exec_tin', 'like', "%{$search}%");
                     }),
                 TextColumn::make('board_resolution_date')
-                    ->getStateUsing(fn ($record) => $record->meta->board_resolution_date)
+                    ->getStateUsing(fn ($record) =>Carbon::parse($record->board_resolution_date)->format('Y-m-d') )
                     ->sortable(query: function (Builder $query, string $direction): Builder {
                         return $query
                             ->orderBy('meta->board_resolution_date', $direction);
