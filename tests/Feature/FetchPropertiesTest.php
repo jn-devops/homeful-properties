@@ -17,11 +17,11 @@ test('fetch properties is working', function () {
     expect($data->properties[0])->toBeInstanceOf(PropertyData::class);
     expect($data->properties[0]->product)->toBeInstanceOf(ProductData::class);
     expect($data->properties[0]->project)->toBeInstanceOf(ProjectData::class);
-})->skip();
+});
 
 test('fetch properties end point is working', function () {
     $properties = Property::factory(3)->forProduct()->forProject()->create();
     $response = $this->get(route('fetch-products'));
     expect($response->json())->toHaveCount(2);
-})->skip();
+});
 
