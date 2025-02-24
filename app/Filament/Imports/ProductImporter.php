@@ -71,6 +71,10 @@ class ProductImporter extends Importer
         );
         $product->facade_url= $facadeUrl ?? '';
         $product->directions= $this->data['directions'] ?? '';
+        $product->name= $this->data['name'] ?? '';
+        $product->brand= $this->data['brand'] ?? '';
+        $product->category= $this->data['category'] ?? '';
+        $product->description= $this->data['description'] ?? '';
         $product->destinations= $this->data['destinations'] ?? '';
         $product->amenities= $this->data['amenities'] ?? '';
 
@@ -121,6 +125,10 @@ class ProductImporter extends Importer
         );
         $this->record->facade_url= $facadeUrl ?? '';
         $this->record->directions= $this->data['directions'] ?? '';
+        $this->record->name= $this->data['name'] ?? '';
+        $this->record->brand= $this->data['brand'] ?? '';
+        $this->record->category= $this->data['category'] ?? '';
+        $this->record->description= $this->data['description'] ?? '';
         $this->record->destinations= $this->data['destinations'] ?? '';
         $this->record->amenities= $this->data['amenities'] ?? '';
 
