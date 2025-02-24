@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Homeful\Products\Models\Product;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class ProductsResource extends Resource
@@ -68,64 +69,169 @@ class ProductsResource extends Resource
             ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('sku')
+                    ->searchable()
                     ->label('SKU'),
                 TextColumn::make('project_code')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->project_code', 'like', "%{$search}%");
+                    })
                     ->label('Project Code'),
                 TextColumn::make('name')
+                    ->searchable()
                     ->label('Name'),
                 TextColumn::make('brand')
+                    ->searchable()
                     ->label('Brand'),
                 TextColumn::make('category')
+                    ->searchable()
                     ->label('Category'),
                 TextColumn::make('description')
+                    ->searchable()
                     ->label('Description'),
                 TextColumn::make('price')
+                    ->searchable()
                     ->label('Price'),
                 TextColumn::make('processing_fee')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->processing_fee', 'like', "%{$search}%");
+                    })
                     ->label('Processing Fee'),
                 TextColumn::make('destinations')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->destinations', 'like', "%{$search}%");
+                    })
                     ->label('Destinations'),
                 TextColumn::make('directions')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->directions', 'like', "%{$search}%");
+                    })
                     ->label('Directions'),
                 TextColumn::make('amenities')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->amenities', 'like', "%{$search}%");
+                    })
                     ->label('Amenities'),
                 TextColumn::make('facade_url')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->facade_url', 'like', "%{$search}%");
+                    })
                     ->label('Facade URL'),
                 TextColumn::make('lot_area')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->lot_area', 'like', "%{$search}%");
+                    })
                     ->label('Lot Area'),
                 TextColumn::make('floor_area')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->floor_area', 'like', "%{$search}%");
+                    })
                     ->label('Floor Area'),
                 TextColumn::make('property_type')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->property_type', 'like', "%{$search}%");
+                    })
                     ->label('Property Type'),
+
+
+
                 TextColumn::make('house_type')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->property_type', 'like', "%{$search}%");
+                    })
                     ->label('House Type'),
                 TextColumn::make('unit_type')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->unit_type', 'like', "%{$search}%");
+                    })
                     ->label('Unit Type'),
                 TextColumn::make('appraised_value')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->appraised_value', 'like', "%{$search}%");
+                    })
                     ->label('Appraised Value'),
                 TextColumn::make('percent_down_payment')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->percent_down_payment', 'like', "%{$search}%");
+                    })
                     ->label('Percent Down Payment'),
                 TextColumn::make('down_payment_term')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->down_payment_term', 'like', "%{$search}%");
+                    })
                     ->label('Down Payment Term'),
                 TextColumn::make('balance_payment_term')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->balance_payment_term', 'like', "%{$search}%");
+                    })
                     ->label('Balance Payment Term'),
                 TextColumn::make('percent_miscellaneous_fees')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->percent_miscellaneous_fees', 'like', "%{$search}%");
+                    })
                     ->label('Percent Miscellaneous Fees'),
                 TextColumn::make('balance_payment_interest_rate')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->balance_payment_interest_rate', 'like', "%{$search}%");
+                    })
                     ->label('Interest Rate'),
                 TextColumn::make('max_age')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->max_age', 'like', "%{$search}%");
+                    })
                     ->label('Max Age'),
                 TextColumn::make('percent_gross_monthly_income')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->percent_gross_monthly_income', 'like', "%{$search}%");
+                    })
                     ->label('Percent GMI'),
                 TextColumn::make('mortgage_redemption_insurance_fee')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->mortgage_redemption_insurance_fee', 'like', "%{$search}%");
+                    })
                     ->label('MRIF'),
                 TextColumn::make('income_requirement_multiplier')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->income_requirement_multiplier', 'like', "%{$search}%");
+                    })
                     ->label('Income Requirement Multiplier'),
                 TextColumn::make('maximum_paying_age')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->maximum_paying_age', 'like', "%{$search}%");
+                    })
                     ->label('Maximum Paying Age'),
                 TextColumn::make('key_location')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->key_location', 'like', "%{$search}%");
+                    })
                     ->label('Key Location'),
                 TextColumn::make('digital_assets')
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->digital_assets', 'like', "%{$search}%");
+                    })
                     ->label('Digital Assets'),
             ])
             ->filters([
