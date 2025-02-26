@@ -62,8 +62,8 @@ class PropertyImporter extends Importer
         $property->block=(string) ($this->data['block'] ?? '');
         $property->lot=(string) ($this->data['lot'] ?? '');
         $property->building=(string) ($this->data['building'] ?? '');
-        $property->floor_area=(string) ($this->data['floor_area'] ?? '');
-        $property->lot_area=(string) ($this->data['lot_area'] ?? '');
+        $property->floor_area=(float) ($this->data['floor_area'] ?? '');
+        $property->lot_area=(float) ($this->data['lot_area'] ?? '');
         $property->unit_type=(string) ($this->data['unit_type'] ?? '');
         $property->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
         $property->house_color=(string) ($this->data['string'] ?? '');
@@ -106,8 +106,8 @@ class PropertyImporter extends Importer
         $property->block=(string) ($this->data['block'] ?? '');
         $property->lot=(string) ($this->data['lot'] ?? '');
         $property->building=(string) ($this->data['building'] ?? '');
-        $property->floor_area=(string) ($this->data['floor_area'] ?? '');
-        $property->lot_area=(string) ($this->data['lot_area'] ?? '');
+        $property->floor_area=(float) ($this->data['floor_area'] ?? '');
+        $property->lot_area=(float) ($this->data['lot_area'] ?? '');
         $property->unit_type=(string) ($this->data['unit_type'] ?? '');
         $property->unit_type_interior=(string) ($this->data['unit_type_interior'] ?? '');
         $property->house_color=(string) ($this->data['string'] ?? '');
