@@ -59,7 +59,7 @@ class ProductsResource extends Resource
                         Forms\Components\TextInput::make('maximum_paying_age'),
                         Forms\Components\TextInput::make('key_location'),
                         Forms\Components\TextInput::make('digital_assets'),
-                        Forms\Components\Toggle::make('phase_out'),
+                        Forms\Components\Toggle::make('phased_out'),
                     ])
             ]);
     }
@@ -94,10 +94,10 @@ class ProductsResource extends Resource
                 TextColumn::make('price')
                     ->searchable()
                     ->label('Price'),
-                TextColumn::make('phase_out')
+                TextColumn::make('phased_out')
                     ->badge()
                     ->label('Phase Out')
-                    ->getStateUsing(fn($record) => ($record->phase_out) ? 'Yes' : 'No')
+                    ->getStateUsing(fn($record) => ($record->phased_out) ? 'Yes' : 'No')
                     ->color(fn (string $state) => match ($state) {
                         'No' => 'success',
                         default => 'danger'
@@ -272,7 +272,7 @@ class ProductsResource extends Resource
                         $data['amenities']=$record->amenities;
                         $data['key_location']=$record->key_location;
                         $data['digital_assets']=$record->digital_assets;
-                        $data['phase_out']=$record->phase_out;
+                        $data['phased_out']=$record->phased_out;
                         return $data;
                     })
                     ->using(function (Model $record, array $data): Model {
@@ -293,7 +293,7 @@ class ProductsResource extends Resource
                         $record->amenities = $data['amenities'];
                         $record->key_location = $data['key_location'];
                         $record->digital_assets = $data['digital_assets'];
-                        $record->phase_out = $data['phase_out'];
+                        $record->phased_out = $data['phased_out'];
 
                         $record->save();
 
