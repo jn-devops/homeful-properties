@@ -10,7 +10,7 @@ class FetchProductsController extends Controller
 {
     public function __invoke(Request $request): FetchData
     {
-        $products = Product::all();
+        $products = Product::withMeta(['phased_out' => false])->get();
 
         return FetchData::from(compact('products'))
 //            ->only(
