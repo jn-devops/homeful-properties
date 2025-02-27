@@ -96,7 +96,7 @@ class ProductsResource extends Resource
                     ->label('Price'),
                 TextColumn::make('phased_out')
                     ->badge()
-                    ->label('Phase Out')
+                    ->label('Phased Out')
                     ->getStateUsing(fn($record) => ($record->phased_out) ? 'Yes' : 'No')
                     ->color(fn (string $state) => match ($state) {
                         'No' => 'success',
