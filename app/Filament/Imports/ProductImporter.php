@@ -48,6 +48,7 @@ class ProductImporter extends Importer
             ImportColumn::make('balance_payment_term')
                 ->guess(['bp_term']),
             ImportColumn::make('processing_fee'),
+            ImportColumn::make('phase_out'),
         ];
     }
 
@@ -99,6 +100,7 @@ class ProductImporter extends Importer
         $product->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
         $product->floor_area = (float) ($this->data['floor_area'] ?? 0);
         $product->lot_area = (float) ($this->data['lot_area'] ?? 0);
+        $product->phase_out = (float) ($this->data['phase_out'] ?? false);
 
         $product->save();
         return $product;
@@ -153,6 +155,7 @@ class ProductImporter extends Importer
         $this->record->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
         $this->record->floor_area = (float) ($this->data['floor_area'] ?? 0);
         $this->record->lot_area = (float) ($this->data['floor_area'] ?? 0);
+        $this->record->phase_out = (float) ($this->data['phase_out'] ?? false);
 
         $this->record->save();
     }

@@ -48,9 +48,10 @@ class ProductsResource extends Resource
                         Forms\Components\TextInput::make('unit_type'),
                         Forms\Components\TextInput::make('appraised_value'),
                         Forms\Components\TextInput::make('percent_down_payment'),
+                        Forms\Components\TextInput::make('balance_payment_term'),
                         Forms\Components\TextInput::make('down_payment_term'),
                         Forms\Components\TextInput::make('percent_miscellaneous_fees'),
-                        Forms\Components\TextInput::make('interest_rate'),
+                        Forms\Components\TextInput::make('balance_payment_interest_rate'),
                         Forms\Components\TextInput::make('percent_gross_monthly_income'),
                         Forms\Components\TextInput::make('max_age'),
                         Forms\Components\TextInput::make('mortgage_redemption_insurance_fee'),
@@ -58,6 +59,7 @@ class ProductsResource extends Resource
                         Forms\Components\TextInput::make('maximum_paying_age'),
                         Forms\Components\TextInput::make('key_location'),
                         Forms\Components\TextInput::make('digital_assets'),
+                        Forms\Components\Toggle::make('phase_out'),
                     ])
             ]);
     }
@@ -92,6 +94,14 @@ class ProductsResource extends Resource
                 TextColumn::make('price')
                     ->searchable()
                     ->label('Price'),
+                TextColumn::make('phase_out')
+                    ->badge()
+                    ->label('Phase Out')
+                    ->getStateUsing(fn($record) => ($record->phase_out) ? 'Yes' : 'No')
+                    ->color(fn (string $state) => match ($state) {
+                        'No' => 'success',
+                        default => 'danger'
+                    }),
                 TextColumn::make('processing_fee')
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
@@ -190,7 +200,7 @@ class ProductsResource extends Resource
                         return $query
                             ->where('meta->balance_payment_interest_rate', 'like', "%{$search}%");
                     })
-                    ->label('Interest Rate'),
+                    ->label('Balance Payment Interest Rate'),
                 TextColumn::make('max_age')
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
@@ -252,11 +262,17 @@ class ProductsResource extends Resource
                         $data['percent_dp']=$record->meta->percent_dp;
                         $data['percent_mf']=$record->meta->percent_mf;
                         $data['dp_term']=$record->meta->dp_term;
+                        $data['percent_down_payment']=$record->meta->percent_down_payment;
+                        $data['down_payment_term']=$record->meta->down_payment_term;
+                        $data['balance_payment_term']=$record->meta->balance_payment_term;
+                        $data['percent_miscellaneous_fees']=$record->meta->percent_miscellaneous_fees;
+                        $data['balance_payment_interest_rate']=$record->meta->balance_payment_interest_rate;
 
                         $data['destinations']=$record->destinations;
                         $data['amenities']=$record->amenities;
                         $data['key_location']=$record->key_location;
                         $data['digital_assets']=$record->digital_assets;
+                        $data['phase_out']=$record->phase_out;
                         return $data;
                     })
                     ->using(function (Model $record, array $data): Model {
@@ -277,6 +293,7 @@ class ProductsResource extends Resource
                         $record->amenities = $data['amenities'];
                         $record->key_location = $data['key_location'];
                         $record->digital_assets = $data['digital_assets'];
+                        $record->phase_out = $data['phase_out'];
 
                         $record->save();
 
