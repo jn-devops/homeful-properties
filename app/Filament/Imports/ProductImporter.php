@@ -154,7 +154,7 @@ class ProductImporter extends Importer
         $this->record->unit_type=(string) ($this->data['unit_type'] ?? '');
         $this->record->balance_payment_term = (float) ($this->data['bp_term'] ?? 0);
         $this->record->floor_area = (float) ($this->data['floor_area'] ?? 0);
-        $this->record->lot_area = (float) ($this->data['floor_area'] ?? 0);
+        $this->record->lot_area = (float) ($this->data['lot_area'] ?? 0);
         $this->record->phased_out = (bool) ($this->data['phased_out'] ?? false);
 
         $this->record->save();
