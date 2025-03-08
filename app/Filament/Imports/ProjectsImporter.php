@@ -54,6 +54,8 @@ class ProjectsImporter extends Importer
                 ->rules(['max:255']),
             ImportColumn::make('pagibig_filing_site')
                 ->rules(['max:255']),
+            ImportColumn::make('filing_site')
+                ->rules(['max:255']),
             ImportColumn::make('exec_position')
                 ->rules(['max:255']),
             ImportColumn::make('exec_signatory')
@@ -95,7 +97,7 @@ class ProjectsImporter extends Importer
 //            $project->meta->set('licenseDate', $this->data['license_date']);
             $project->meta->set('license_date',
                 !empty($this->data['license_date'])
-                    ? Carbon::parse($this->data['license_date'])
+                    ? Carbon::parse($this->data['license_date'])->format('Y-m-d')
                     : null
             );
 
@@ -108,11 +110,12 @@ class ProjectsImporter extends Importer
             $project->meta->set('company_tin', $this->data['company_tin']??'');
             $project->meta->set('company_address', $this->data['company_address']??'');
             $project->meta->set('pagibig_filing_site', $this->data['pagibig_filing_site']??'');
+            $project->meta->set('filing_site', $this->data['filing_site']??'');
             $project->meta->set('exec_position', $this->data['exec_position']??'');
             $project->meta->set('exec_signatory', $this->data['exec_signatory']??'');
             $project->meta->set('exec_tin', $this->data['exec_tin']??'');
             $project->board_resolution_date = !empty($this->data['board_resolution_date'])
-                ? Carbon::parse($this->data['board_resolution_date'])
+                ? Carbon::parse($this->data['board_resolution_date'])->format('Y-m-d')
                 : null;
 
             $project->save();
@@ -149,20 +152,25 @@ class ProjectsImporter extends Importer
 
         $this->record->meta->set('housingType', $this->data['housing_type']);
         $this->record->meta->set('licenseNumber', $this->data['licenseNumber']);
-        $this->record->meta->set('licenseDate', $this->data['license_date']);
+        $this->record->meta->set('licenseDate', 
+            !empty($this->data['license_date'])
+                ? Carbon::parse($this->data['license_date'])->format('Y-m-d')
+                : null
+        );
         $this->record->meta->set('company_code', $this->data['company_code']);
         $this->record->meta->set('appraised_lot_value',(float) $this->data['appraised_lot_value']??0);
         $this->record->meta->set('appraised__lot_value',(float) $this->data['appraised_lot_value']??0);
         $this->record->meta->set('total_sold', $this->data['total_sold']);
-        $this->company_name = $this->data['company_name'];
-        $this->company_tin = $this->data['company_tin'];
-        $this->company_address = $this->data['company_address'];
-        $this->pagibig_filing_site = $this->data['pagibig_filing_site'];
-        $this->exec_position = $this->data['exec_position'];
-        $this->exec_signatory = $this->data['exec_signatory'];
-        $this->exec_tin = $this->data['exec_tin'];
+        $this->record->company_name = $this->data['company_name'];
+        $this->record->company_tin = $this->data['company_tin'];
+        $this->record->company_address = $this->data['company_address'];
+        $this->record->pagibig_filing_site = $this->data['pagibig_filing_site'];
+        $this->record->filing_site = $this->data['filing_site'];
+        $this->record->exec_position = $this->data['exec_position'];
+        $this->record->exec_signatory = $this->data['exec_signatory'];
+        $this->record->exec_tin = $this->data['exec_tin'];
         $this->record->board_resolution_date = !empty($this->data['board_resolution_date'])
-            ? Carbon::parse($this->data['board_resolution_date'])
+            ? Carbon::parse($this->data['board_resolution_date'])->format('Y-m-d')
             : null;
 
         $this->record->save();

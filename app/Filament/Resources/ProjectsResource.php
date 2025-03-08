@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\ProjectsResource\Pages;
 use App\Filament\Resources\ProjectsResource\RelationManagers;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -60,9 +61,8 @@ class ProjectsResource extends Resource
                 TextInput::make('licenseNumber')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('licenseDate')
-                    ->required()
-                    ->maxLength(255),
+                DatePicker::make('licenseDate')
+                    ->required(),
                 TextInput::make('company_name')
                     ->required()
                     ->maxLength(255),
@@ -78,6 +78,9 @@ class ProjectsResource extends Resource
                 TextInput::make('pagibig_filing_site')
                     ->required()
                     ->maxLength(255),
+                TextInput::make('filing_site')
+                    ->required()
+                    ->maxLength(255),
                 TextInput::make('exec_position')
                     ->required()
                     ->maxLength(255),
@@ -87,9 +90,8 @@ class ProjectsResource extends Resource
                 TextInput::make('exec_tin')
                     ->required()
                     ->maxLength(255),
-                TextInput::make('board_resolution_date')
-                    ->required()
-                    ->maxLength(255),
+                DatePicker::make('board_resolution_date')
+                    ->required(),
                 TextInput::make('appraised_lot_value')
                     ->numeric()
                     ->required(),
@@ -217,6 +219,16 @@ class ProjectsResource extends Resource
                         return $query
                             ->where('meta->pagibig_filing_site', 'like', "%{$search}%");
                     }),
+                TextColumn::make('filing_site')
+                    ->formatStateUsing(fn ($record) => $record->meta->filing_site)
+                    ->sortable(query: function (Builder $query, string $direction): Builder {
+                        return $query
+                            ->orderBy('meta->filing_site', $direction);
+                    })
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('meta->filing_site', 'like', "%{$search}%");
+                    }),
                 TextColumn::make('exec_position')
                     ->formatStateUsing(fn ($record) => $record->meta->exec_position)
                     ->sortable(query: function (Builder $query, string $direction): Builder {
@@ -284,7 +296,16 @@ class ProjectsResource extends Resource
                         $data['housingType']=$record->meta->get('housingType');
                         $data['licenseNumber']=$record->meta->get('licenseNumber');
                         $data['licenseDate']=$record->meta->get('licenseDate');
+                        $data['company_name']=$record->meta->get('company_name');
                         $data['company_code']=$record->meta->get('company_code');
+                        $data['company_tin']=$record->meta->get('company_tin');
+                        $data['company_address']=$record->meta->get('company_address');
+                        $data['pagibig_filing_site']=$record->meta->get('pagibig_filing_site');
+                        $data['filing_site']=$record->meta->get('filing_site');
+                        $data['exec_position']=$record->meta->get('exec_position');
+                        $data['exec_signatory']=$record->meta->get('exec_signatory');
+                        $data['exec_tin']=$record->meta->get('exec_tin');
+                        $data['board_resolution_date']=$record->meta->get('board_resolution_date');
                         $data['appraised_lot_value']=$record->meta->get('appraised_lot_value');
                         $data['total_sold']=$record->meta->get('total_sold');
                         $data['project_description']=$record->meta->get('project_description');

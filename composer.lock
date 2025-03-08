@@ -3217,16 +3217,16 @@
         },
         {
             "name": "jn-devops/properties",
-            "version": "v1.5.14",
+            "version": "v1.5.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/properties.git",
-                "reference": "3f53a177647cb1e0afba914ba93b4ae1898c81d2"
+                "reference": "2d8f5df6dc0cb94c45d2fb238abb81f660767702"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/properties/zipball/3f53a177647cb1e0afba914ba93b4ae1898c81d2",
-                "reference": "3f53a177647cb1e0afba914ba93b4ae1898c81d2",
+                "url": "https://api.github.com/repos/jn-devops/properties/zipball/2d8f5df6dc0cb94c45d2fb238abb81f660767702",
+                "reference": "2d8f5df6dc0cb94c45d2fb238abb81f660767702",
                 "shasum": ""
             },
             "require": {
@@ -3287,7 +3287,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/properties/issues",
-                "source": "https://github.com/jn-devops/properties/tree/v1.5.14"
+                "source": "https://github.com/jn-devops/properties/tree/v1.5.15"
             },
             "funding": [
                 {
@@ -3295,7 +3295,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-20T08:29:37+00:00"
+            "time": "2025-03-06T09:18:24+00:00"
         },
         {
             "name": "jn-devops/property",
@@ -12832,12 +12832,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
