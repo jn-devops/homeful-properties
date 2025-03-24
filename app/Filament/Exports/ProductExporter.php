@@ -68,13 +68,20 @@ class ProductExporter extends Exporter
                 ->state(function (Product $record) {
                     return $record->appraised_value;
                 }),
-            ExportColumn::make('percent_dp')
+            ExportColumn::make('percent_down_payment')
+                ->label('Percent Down Payment')
                 ->state(function (Product $record) {
-                    return $record->meta->get('percent_dp');
+                    return $record->meta->get('percent_down_payment');
                 }),
-            ExportColumn::make('dp_term')
+            ExportColumn::make('down_payment_term')
+                ->label('Down Payment Term')
                 ->state(function (Product $record) {
-                    return $record->meta->get('dp_term');
+                    return $record->meta->get('down_payment_term');
+                }),
+            ExportColumn::make('balance_payment_term')
+                ->label('Balance Payment Term')
+                ->state(function (Product $record) {
+                    return $record->meta->get('balance_payment_term');
                 }),
             ExportColumn::make('percent_mf')
                 ->state(function (Product $record) {
